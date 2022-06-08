@@ -21,29 +21,57 @@ struct fVec3
 	fVec3(float _x, float _y, float _z);
 	fVec3();
 
+	fVec3(fVec2 v);
+
 	float& operator[](int index);
 	float sqrMag();
 	float mag();
 };
 
+//basic operators
+fVec2 operator+(fVec2 u, fVec2 v);
+fVec2 operator-(fVec2 u, fVec2 v);
+fVec2 operator*(fVec2 v, float s);
+fVec2 operator/(fVec2 v, float s);
+//negate vector
+fVec2 operator-(fVec2 v);
+//assignment operators
+fVec2& operator+=(fVec2& l, fVec2& r);
+fVec2& operator-=(fVec2& l, fVec2& r);
+fVec2& operator*=(fVec2& l, float& r);
+fVec2& operator/=(fVec2& l, float& r);
 
 
-struct iVec2
+//operators
+fVec3 operator+(fVec3 u, fVec3 v);
+fVec3 operator-(fVec3 u, fVec3 v);
+fVec3 operator*(fVec3 v, float s);
+fVec3 operator/(fVec3 v, float s);
+//negate vector
+fVec3 operator-(fVec3 v);
+//assignment operators
+fVec3& operator+=(fVec3& l, fVec3& r);
+fVec3& operator-=(fVec3& l, fVec3& r);
+fVec3& operator*=(fVec3& l, float& r);
+fVec3& operator/=(fVec3& l, float& r);
+
+
+class Transform
 {
-	int x, y;
+private:
+	float items[16];
+	Transform();
+public:
 
-	iVec2(int _x, int _y);
-	iVec2();
+	float& operator[](unsigned int index);
 
-	int& operator[](int index);
-};
+	float& get(unsigned int i, unsigned int j);
 
+	static Transform Identity();
+	static Transform Translate(fVec3 pos);
+	static Transform Rotate(float thetaRad, fVec3 axis);
 
-struct iVec3
-{
-	int x, y, z;
-	iVec3(int _x, int _y, int _z);
-	iVec3();
+	Transform operator* (Transform t);
+	friend class Shader;
 
-	int& operator[](int index);
 };
