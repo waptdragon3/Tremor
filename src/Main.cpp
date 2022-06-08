@@ -1,6 +1,6 @@
 #include <glad/glad.h>
 
-#include "Math.h"
+#include "VMath.h"
 #include "graphics/GLFW.h"
 #include "graphics/Window.h"
 #include "graphics/Shader.h"
@@ -13,31 +13,50 @@ int main()
 	Window window(1280, 720, "Tremor");
 	window.makeCurrentContext();
 
+
 	gladLoadGL();
 	glViewport(0, 0, 1280, 720);
+	glEnable(GL_DEPTH_TEST);
 
 	Texture t("resources/textures/Shadowfell.jpg");
 
 	float vertices[] = {
 		// positions            // texture coords
-		 0.5f,  0.5f, 0.0f,     1.0f, 1.0f,   // top right
-		 0.5f, -0.5f, 0.0f,     1.0f, 0.0f,   // bottom right
-		-0.5f, -0.5f, 0.0f,     0.0f, 0.0f,   // bottom left
-		-0.5f,  0.5f, 0.0f,     0.0f, 1.0f    // top left 
+		 0.5f,  0.5f, -0.5f,     1.0f, 1.0f,   // Back top right
+		 0.5f, -0.5f, -0.5f,     1.0f, 0.0f,   // Back bottom right
+		-0.5f, -0.5f, -0.5f,     0.0f, 0.0f,   // Back bottom left
+		-0.5f,  0.5f, -0.5f,     0.0f, 1.0f,   // Back top left 
+
+		 0.5f,  0.5f, 0.5f,      0.0f, 0.0f,   // front top right
+		 0.5f, -0.5f, 0.5f,      1.0f, 1.0f,   // front bottom right
+		-0.5f, -0.5f, 0.5f,      1.0f, 0.0f,   // front bottom left
+		-0.5f,  0.5f, 0.5f,      0.0f, 1.0f    // front top left 
 	};
 	unsigned int indices[] = {  // note that we start from 0!
 		0, 1, 3,   // first triangle
-		1, 2, 3    // second triangle
+		1, 2, 3,   // second triangle
+		0, 1, 4,
+		1, 4, 5,
+		0, 3, 4,
+		3, 4, 7,
+		3, 2, 6,
+		3, 6, 7,
+		4, 5, 6,
+		4, 6, 7,
+		1, 2, 5,
+		2, 5, 6
 	};
 
 	const char* vertexShaderSource = "#version 330 core\n"
 		"layout(location = 0) in vec3 aPos;\n"
 		"layout(location = 1) in vec2 aTexCoord;\n"
 		"out vec2 TexCoord;\n"
-		"uniform mat4 transform;\n"
+		"uniform mat4 model;\n"
+		"uniform mat4 view;\n"
+		"uniform mat4 projection;\n"
 		"void main()\n"
 		"{\n"
-		"	gl_Position = transform * vec4(aPos, 1.0);\n"
+		"	gl_Position = projection * view * model * vec4(aPos, 1.0);\n"
 		"	TexCoord = aTexCoord;\n"
 		"}\n";
 
@@ -79,16 +98,23 @@ int main()
 	while (!window.shouldClose())
 	{
 		glClearColor(0.0, 0.0, 0.0, 1.0);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		
-		Transform transform = Transform::Identity();
-		transform = transform * Transform::Translate(fVec3(0.5f, -0.5f, -0.5f));
-		transform = transform * Transform::Rotate(GLFW::getTime(), fVec3(0.0f, 0.0f, 1.0f));
+		fVec3 offset;
+		offset = offset + fVec3(3.0f, 0.0f, 0.0f) * static_cast<float>(sin(GLFW::getTime()));
+		offset = offset + fVec3(0.0f, 3.0f, 0.0f) * static_cast<float>(cos(GLFW::getTime()));
+
+
+		Transform model = Transform::Identity() * Transform::Rotate(GLFW::getTime(), fVec3(0.5f, 1.0f, 0.0f));
+		Transform view = Transform::Identity() * Transform::Translate(fVec3(0.0f, 0.0f, -3.0f));
+		Transform proj = Transform::Identity() * Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
 
 
 		shader.use();
-		shader.setMatrix("transform", transform);
+		shader.setMatrix("model", model);
+		shader.setMatrix("view", view);
+		shader.setMatrix("projection", proj);
 
 		//activate shader
 		shader.use();
@@ -96,7 +122,7 @@ int main()
 		t.bind();
 		//bind VAO
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 
 

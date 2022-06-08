@@ -1,4 +1,4 @@
-#include "Math.h"
+#include "VMath.h"
 #include <stdexcept>
 #include <cmath>
 
@@ -128,6 +128,11 @@ fVec3& operator/=(fVec3& l, float& r)
 	return l;
 }
 
+float degreesToRad(float degrees)
+{
+	return degrees * 3.14159f / 180.0f;
+}
+
 Transform::Transform()
 {
 	for (int i = 0; i < 16; i++)
@@ -146,7 +151,7 @@ float& Transform::get(unsigned int i, unsigned int j)
 {
 	if (i < 4 && j < 4)
 	{
-		return items[i * 4 + j];
+		return items[j * 4 + i];
 	}
 }
 
@@ -171,23 +176,42 @@ Transform Transform::Translate(fVec3 pos)
 
 Transform Transform::Rotate(float theta, fVec3 axis)
 {
-	Transform t = Transform::Identity();
+	Transform t;
 	float cos = std::cos(theta);
 	float sin = std::sin(theta);
+	float x = axis.x;
+	float y = axis.y;
+	float z = axis.z;
 	//some magic rotation bullshit
-	t.get(0, 0) = cos + (axis.x * axis.x) * (1 - cos);
+	t.get(0, 0) = (axis.x * axis.x) * (1 - cos) + cos;
 	t.get(0, 1) = axis.x * axis.y * (1 - cos) - axis.z * sin;
 	t.get(0, 2) = axis.x * axis.z * (1 - cos) + axis.y * sin;
 
 	t.get(1, 0) = axis.y * axis.x * (1 - cos) + axis.z * sin;
-	t.get(1, 1) = cos + (axis.y * axis.y) * (1 - cos);
-	t.get(1, 2) = axis.y * axis.z * (1 - cos) + axis.y * sin;
+	t.get(1, 1) = (axis.y * axis.y) * (1 - cos) + cos;
+	t.get(1, 2) = axis.y * axis.z * (1 - cos) + axis.x * sin;
 
-	t.get(2, 0) = axis.z * axis.x * (1 - cos) - axis.y * sin;
-	t.get(2, 1) = axis.z * axis.y * (1 - cos) + axis.x * sin;
-	t.get(2, 2) = cos + (axis.z * axis.z) * (1 - cos);
+	t.get(2, 0) = axis.x * axis.z * (1 - cos) - axis.y * sin;
+	t.get(2, 1) = axis.y * axis.z * (1 - cos) + axis.x * sin;
+	t.get(2, 2) = (axis.z * axis.z) * (1 - cos) + cos;
 
 	t.get(3, 3) = 1;
+
+	return t;
+}
+
+Transform Transform::Perspective(float fov, float aspectRatio, float near, float far)
+{
+	Transform t;
+	float rad = degreesToRad(fov);
+	float cot = std::cos(rad) / std::sin(rad);
+
+	t.get(0, 0) = cot / aspectRatio;
+	t.get(1, 1) = cot;
+
+	t.get(2, 2) = (far + near) / (near - far);
+	t.get(2, 3) = (2 * far * near) / (near - far);
+	t.get(3, 2) = -1;
 
 	return t;
 }

@@ -1,4 +1,4 @@
-#include "Shader.h"
+#include "graphics/Shader.h"
 
 #include <fstream>
 #include <sstream>
@@ -6,7 +6,7 @@
 
 #include <glad/glad.h>
 
-#include "../Math.h"
+#include "VMath.h"
 
 Shader::Shader(const char* vShaderCode, const char* fShaderCode)
 {

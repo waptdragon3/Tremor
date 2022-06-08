@@ -72,22 +72,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\wthom\source\repos\Tremor\libraries\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\wthom\source\repos\Tremor\include;C:\Users\wthom\source\repos\Tremor\libraries\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\wthom\source\repos\Tremor\libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\wthom\source\repos\Tremor\libraries\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\wthom\source\repos\Tremor\include;C:\Users\wthom\source\repos\Tremor\libraries\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\wthom\source\repos\Tremor\libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\wthom\source\repos\Tremor\libraries\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\wthom\source\repos\Tremor\include;C:\Users\wthom\source\repos\Tremor\libraries\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\wthom\source\repos\Tremor\libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\wthom\source\repos\Tremor\libraries\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\wthom\source\repos\Tremor\include;C:\Users\wthom\source\repos\Tremor\libraries\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\wthom\source\repos\Tremor\libraries\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -96,7 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\wthom\source\repos\Tremor\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -112,7 +112,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\wthom\source\repos\Tremor\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,7 +128,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\wthom\source\repos\Tremor\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\wthom\source\repos\Tremor\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -155,21 +155,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c" />
-    <ClCompile Include="graphics\GLFW.cpp" />
-    <ClCompile Include="graphics\Texture.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Math.cpp" />
-    <ClCompile Include="graphics\Shader.cpp" />
-    <ClCompile Include="graphics\Window.cpp" />
+    <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\graphics\GLFW.cpp" />
+    <ClCompile Include="src\graphics\Texture.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\VMath.cpp" />
+    <ClCompile Include="src\graphics\Shader.cpp" />
+    <ClCompile Include="src\graphics\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="graphics\GLFW.h" />
-    <ClInclude Include="graphics\stb_image.h" />
-    <ClInclude Include="graphics\Texture.h" />
-    <ClInclude Include="Math.h" />
-    <ClInclude Include="graphics\Shader.h" />
-    <ClInclude Include="graphics\Window.h" />
+    <ClInclude Include="include\graphics\GLFW.h" />
+    <ClInclude Include="include\graphics\stb_image.h" />
+    <ClInclude Include="include\graphics\Texture.h" />
+    <ClInclude Include="include\VMath.h" />
+    <ClInclude Include="include\graphics\Shader.h" />
+    <ClInclude Include="include\graphics\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

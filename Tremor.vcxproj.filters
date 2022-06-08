@@ -17,45 +17,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c">
+    <ClCompile Include="src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Math.cpp">
+    <ClCompile Include="src\VMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\GLFW.cpp">
+    <ClCompile Include="src\graphics\GLFW.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\Shader.cpp">
+    <ClCompile Include="src\graphics\Shader.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\Window.cpp">
+    <ClCompile Include="src\graphics\Window.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\Texture.cpp">
+    <ClCompile Include="src\graphics\Texture.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Math.h">
+    <ClInclude Include="include\VMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\GLFW.h">
+    <ClInclude Include="include\graphics\GLFW.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\Shader.h">
+    <ClInclude Include="include\graphics\Shader.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\Window.h">
+    <ClInclude Include="include\graphics\Window.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\Texture.h">
+    <ClInclude Include="include\graphics\Texture.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="graphics\stb_image.h">
+    <ClInclude Include="include\graphics\stb_image.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
   </ItemGroup>

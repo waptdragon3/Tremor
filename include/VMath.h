@@ -70,8 +70,11 @@ public:
 	static Transform Identity();
 	static Transform Translate(fVec3 pos);
 	static Transform Rotate(float thetaRad, fVec3 axis);
+	static Transform Perspective(float fov, float aspectRatio, float near, float far);
 
 	Transform operator* (Transform t);
 	friend class Shader;
 
 };
+
+float degreesToRad(float degrees);
