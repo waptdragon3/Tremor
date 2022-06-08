@@ -6,6 +6,12 @@
 #include "graphics/Shader.h"
 #include "graphics/Texture.h"
 
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+
 int main()
 {
 	GLFW::init();
@@ -105,16 +111,17 @@ int main()
 		offset = offset + fVec3(3.0f, 0.0f, 0.0f) * static_cast<float>(sin(GLFW::getTime()));
 		offset = offset + fVec3(0.0f, 3.0f, 0.0f) * static_cast<float>(cos(GLFW::getTime()));
 
+		shader.use();
 
 		Transform model = Transform::Identity() * Transform::Rotate(GLFW::getTime(), fVec3(0.5f, 1.0f, 0.0f));
-		Transform view = Transform::Identity() * Transform::Translate(fVec3(0.0f, 0.0f, -3.0f));
+		Transform view = Transform::Identity() * Transform::Translate(fVec3(0.0f, 0.0f, -5.0f));
 		Transform proj = Transform::Identity() * Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
 
 
-		shader.use();
 		shader.setMatrix("model", model);
 		shader.setMatrix("view", view);
 		shader.setMatrix("projection", proj);
+
 
 		//activate shader
 		shader.use();

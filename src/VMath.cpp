@@ -151,7 +151,7 @@ float& Transform::get(unsigned int i, unsigned int j)
 {
 	if (i < 4 && j < 4)
 	{
-		return items[j * 4 + i];
+		return items[i * 4 + j];
 	}
 }
 
@@ -168,9 +168,9 @@ Transform Transform::Identity()
 Transform Transform::Translate(fVec3 pos)
 {
 	Transform t = Transform::Identity();
-	t.get(0, 3) = pos.x;
-	t.get(1, 3) = pos.y;
-	t.get(2, 3) = pos.z;
+	t.get(3, 0) = pos.x;
+	t.get(3, 1) = pos.y;
+	t.get(3, 2) = pos.z;
 	return t;
 }
 
@@ -179,23 +179,23 @@ Transform Transform::Rotate(float theta, fVec3 axis)
 	Transform t;
 	float cos = std::cos(theta);
 	float sin = std::sin(theta);
-	float x = axis.x;
-	float y = axis.y;
-	float z = axis.z;
+
+	axis = axis / axis.mag();
+
 	//some magic rotation bullshit
-	t.get(0, 0) = (axis.x * axis.x) * (1 - cos) + cos;
-	t.get(0, 1) = axis.x * axis.y * (1 - cos) - axis.z * sin;
-	t.get(0, 2) = axis.x * axis.z * (1 - cos) + axis.y * sin;
+	t.get(0, 0) = (axis.x * axis.x) * (1 - cos) + cos;			//index 0
+	t.get(1, 0) = axis.x * axis.y * (1 - cos) - axis.z * sin;	//index 4
+	t.get(2, 0) = axis.x * axis.z * (1 - cos) + axis.y * sin;	//index 8
 
-	t.get(1, 0) = axis.y * axis.x * (1 - cos) + axis.z * sin;
-	t.get(1, 1) = (axis.y * axis.y) * (1 - cos) + cos;
-	t.get(1, 2) = axis.y * axis.z * (1 - cos) + axis.x * sin;
+	t.get(0, 1) = axis.y * axis.x * (1 - cos) + axis.z * sin;	//index 1
+	t.get(1, 1) = (axis.y * axis.y) * (1 - cos) + cos;			//index 5
+	t.get(2, 1) = axis.y * axis.z * (1 - cos) - axis.x * sin;	//index 9
 
-	t.get(2, 0) = axis.x * axis.z * (1 - cos) - axis.y * sin;
-	t.get(2, 1) = axis.y * axis.z * (1 - cos) + axis.x * sin;
-	t.get(2, 2) = (axis.z * axis.z) * (1 - cos) + cos;
+	t.get(0, 2) = axis.x * axis.z * (1 - cos) - axis.y * sin;	//index 2
+	t.get(1, 2) = axis.y * axis.z * (1 - cos) + axis.x * sin;	//index 6
+	t.get(2, 2) = (axis.z * axis.z) * (1 - cos) + cos;			//index 10
 
-	t.get(3, 3) = 1;
+	t.get(3, 3) = 1;											//index 15
 
 	return t;
 }
@@ -204,15 +204,24 @@ Transform Transform::Perspective(float fov, float aspectRatio, float near, float
 {
 	Transform t;
 	float rad = degreesToRad(fov);
-	float cot = std::cos(rad) / std::sin(rad);
+	float cot = std::cos(rad / 2.0f) / std::sin(rad / 2.0);
 
-	t.get(0, 0) = cot / aspectRatio;
-	t.get(1, 1) = cot;
+	t.get(0, 0) = cot / aspectRatio;				//index 0
+	t.get(1, 1) = cot;								//index 5
 
-	t.get(2, 2) = (far + near) / (near - far);
-	t.get(2, 3) = (2 * far * near) / (near - far);
-	t.get(3, 2) = -1;
+	t.get(2, 2) = (far + near) / (near - far);		//index 10
+	t.get(3, 2) = (2 * far * near) / (near - far);	//index 14
+	t.get(2, 3) = -1;								//index 11
 
+	return t;
+}
+
+Transform Transform::Scale(fVec3 scaleFactors)
+{
+	Transform t;
+	t.get(0, 0) = scaleFactors.x;
+	t.get(1, 1) = scaleFactors.y;
+	t.get(2, 2) = scaleFactors.z;
 	return t;
 }
 

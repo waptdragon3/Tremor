@@ -71,6 +71,7 @@ public:
 	static Transform Translate(fVec3 pos);
 	static Transform Rotate(float thetaRad, fVec3 axis);
 	static Transform Perspective(float fov, float aspectRatio, float near, float far);
+	static Transform Scale(fVec3 scaleFactors);
 
 	Transform operator* (Transform t);
 	friend class Shader;
