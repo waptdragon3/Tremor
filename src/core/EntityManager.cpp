@@ -4,6 +4,7 @@ Entity* EntityManager::makeEntity()
 {
 	Entity* e = new Entity(nextID, this, cManager);
 	entitiesToAdd.addItem(e);
+	nextID++;
 	return e;
 }
 

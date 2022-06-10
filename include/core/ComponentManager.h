@@ -33,7 +33,7 @@ public:
 	DynamicList<Component*> getAllComponentsOfType(cType type);
 
 	//returns the component of type "type" attached to entity "entity". if the component does not exist, it returns nullptr
-	Component* getComponentTypeOnEntity(cType type, Entity* entity);
+	Component* getComponentTypeOnEntity(cType type, const Entity* entity);
 
 	//returns all components attached to entity "entity"
 	DynamicList<Component*> getAllComponentsOnEntity(Entity* entity);

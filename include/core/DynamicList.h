@@ -28,8 +28,8 @@ private:
 	void swap(uint32_t ind1, uint32_t ind2);
 
 public:
-	uint32_t length();
-	uint32_t capacity();
+	uint32_t length() const;
+	uint32_t capacity() const;
 };
 
 template<class T>
@@ -97,13 +97,13 @@ void DynamicList<T>::swap(uint32_t ind1, uint32_t ind2)
 }
 
 template<class T>
-uint32_t DynamicList<T>::length()
+uint32_t DynamicList<T>::length() const
 {
 	return numItems;
 }
 
 template<class T>
-uint32_t DynamicList<T>::capacity()
+uint32_t DynamicList<T>::capacity() const
 {
 	return maxSize;
 }

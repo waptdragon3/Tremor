@@ -15,6 +15,18 @@
     <Filter Include="Header Files\graphics">
       <UniqueIdentifier>{c6f2f889-cc11-43b3-a2fb-d252bb9918fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\core">
+      <UniqueIdentifier>{5477e15d-3862-4ff0-acfc-7c346565e9e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{6c9b3137-1e63-4c47-aaab-874154760a71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\components">
+      <UniqueIdentifier>{cb4dac23-4e9c-4c3f-aeb5-17b99df91cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\core\components">
+      <UniqueIdentifier>{bfc2689e-c8be-4e3d-b174-f978fa91d5d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\glad.c">
@@ -38,20 +50,26 @@
     <ClCompile Include="src\graphics\Texture.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\Entity.cpp">
+    <ClCompile Include="src\core\MainManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\core\Component.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\core\EntityManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\core</Filter>
     </ClCompile>
     <ClCompile Include="src\core\ComponentManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\core\MainManager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\core\Entity.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\EntityManager.cpp">
+      <Filter>Source Files\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\components\BackAndForthCmpt.cpp">
+      <Filter>Source Files\core\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\components\CubeCmpt.cpp">
+      <Filter>Source Files\core\components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,26 +91,32 @@
     <ClInclude Include="include\graphics\stb_image.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\core\DynamicList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\Entity.h">
+    <ClInclude Include="include\core\MainManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\core\Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\EntityManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="include\core\ComponentManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="include\core\TransformCmpt.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\core\DynamicList.h">
+      <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="include\core\MainManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\core\Entity.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\EntityManager.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\components\TransformCmpt.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\components\BackAndForthCmpt.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\components\CubeCmpt.h">
+      <Filter>Header Files\components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

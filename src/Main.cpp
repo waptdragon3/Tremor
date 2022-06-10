@@ -12,9 +12,13 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "core/MainManager.h"
-#include "core/TransformCmpt.h"
+#include "core/components/TransformCmpt.h"
+#include "core/components/CubeCmpt.h"
+#include "core/components/BackAndForthCmpt.h"
 
+#include <random>
 
+fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution);
 
 int main()
 {
@@ -29,33 +33,6 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 
 	Texture t("resources/textures/Shadowfell.jpg");
-
-	float vertices[] = {
-		// positions            // texture coords
-		 0.5f,  0.5f, -0.5f,     1.0f, 1.0f,   // Back top right
-		 0.5f, -0.5f, -0.5f,     1.0f, 0.0f,   // Back bottom right
-		-0.5f, -0.5f, -0.5f,     0.0f, 0.0f,   // Back bottom left
-		-0.5f,  0.5f, -0.5f,     0.0f, 1.0f,   // Back top left 
-
-		 0.5f,  0.5f, 0.5f,      0.0f, 0.0f,   // front top right
-		 0.5f, -0.5f, 0.5f,      1.0f, 1.0f,   // front bottom right
-		-0.5f, -0.5f, 0.5f,      1.0f, 0.0f,   // front bottom left
-		-0.5f,  0.5f, 0.5f,      0.0f, 1.0f    // front top left 
-	};
-	unsigned int indices[] = {  // note that we start from 0!
-		0, 1, 3,   // first triangle
-		1, 2, 3,   // second triangle
-		0, 1, 4,
-		1, 4, 5,
-		0, 3, 4,
-		3, 4, 7,
-		3, 2, 6,
-		3, 6, 7,
-		4, 5, 6,
-		4, 6, 7,
-		1, 2, 5,
-		2, 5, 6
-	};
 
 	const char* vertexShaderSource = "#version 330 core\n"
 		"layout(location = 0) in vec3 aPos;\n"
@@ -81,37 +58,46 @@ int main()
 
 	Shader shader(vertexShaderSource, fragmentShaderSource);
 
-	unsigned int VBO, VAO, EBO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
+	std::default_random_engine generator;
+	std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
 
-	// 1. bind Vertex Array Object
-	glBindVertexArray(VAO);
-	// 2. copy our vertices array in a buffer for OpenGL to use
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	// 3. copy our index array in a element buffer for OpenGL to use
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	// 4. then set the vertex attributes pointers
-	//set position
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	//set UV coords
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
 
 	MainManager mm;
 
+	float radius = 2;
 	//set up scene
+	for(int i = 0; i < 5000; i++)
+	{
+		Entity* e = mm.getEManager()->makeEntity();
+		TransformCmpt* transform = dynamic_cast<TransformCmpt*>(mm.getCManager()->makeComponent(cType::Transform, e));
+		CubeCmpt* cube = dynamic_cast<CubeCmpt*>(mm.getCManager()->makeComponent(cType::Cube, e));
+		BAFCmpt* baf = dynamic_cast<BAFCmpt*>(mm.getCManager()->makeComponent(cType::BAF, e));
+
+		cube->shader = &shader;
+
+		fVec3 posA = randOnSphere(radius, &generator, &distribution);
+		fVec3 posB = randOnSphere(radius, &generator, &distribution);
+
+		
+		baf->pathStart = posA;
+		baf->pathEnd = posB;
+		baf->pathLengthTime = 2.0f;
+		
+		//transform->position = posA;
+		//transform->scale = fVec3(1.0f, 1.0f, 1.0f) * (distribution(generator) * 2);
+	}
 
 
 	mm.update();
 
 	printf("Num Entities: %i\n", mm.getEManager()->numEntities());
 
+	Transform proj = Transform::Identity() * Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
 	
+	shader.use();
+	shader.setMatrix("projection", proj);
+
+
 	while (!window.shouldClose())
 	{
 		glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -122,10 +108,7 @@ int main()
 		offset = offset + fVec3(3.0f, 0.0f, 0.0f) * static_cast<float>(sin(GLFW::getTime()));
 		offset = offset + fVec3(0.0f, 3.0f, 0.0f) * static_cast<float>(cos(GLFW::getTime()));
 
-		shader.use();
 
-		Transform model = Transform::Identity() * Transform::Rotate(GLFW::getTime(), fVec3(0.5f, 1.0f, 0.0f));
-		Transform proj = Transform::Identity() * Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
 
 
 		const float radius = 10.0f;
@@ -135,21 +118,9 @@ int main()
 
 		Transform view = Transform::LookAt(fVec3(camX, 0.0, camZ), fVec3(), fVec3(0.0f, 1.0f, 0.0f));
 
-		shader.setMatrix("model", model);
 		shader.setMatrix("view", view);
-		shader.setMatrix("projection", proj);
 
-
-		//activate shader
-		shader.use();
-		//bind texture
 		t.bind();
-		//bind VAO
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-
-
 		mm.update();
 
 
@@ -158,4 +129,19 @@ int main()
 	}
 
 	return 0;
+}
+
+fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution)
+{
+	float u = distribution->operator()(*generator);
+	float v = distribution->operator()(*generator);
+
+	float theta = 2 * 3.14159f * u;
+	float phi = std::acosf(2 * v - 1);
+	fVec3 pos;
+	pos.x = radius * std::sin(phi) * std::cos(theta);
+	pos.y = radius * std::sin(phi) * std::sin(theta);
+	pos.z = radius * std::cos(phi);
+
+	return pos;
 }

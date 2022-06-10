@@ -1,6 +1,9 @@
 #include "core/ComponentManager.h"
 
-#include "core/TransformCmpt.h"
+//include all component types
+#include "core/components/TransformCmpt.h"
+#include "core/components/CubeCmpt.h"
+#include "core/components/BackAndForthCmpt.h"
 
 
 Component* ComponentManager::makeComponent(cType type, Entity* entity)
@@ -11,12 +14,21 @@ Component* ComponentManager::makeComponent(cType type, Entity* entity)
 	case cType::Invalid:
 		break;
 	case cType::Transform:
-		c = new TransformCmpt::Component(nextID, type, entity, eManager, this);
+		c = new TransformCmpt();
+		break;
+	case cType::Cube:
+		c = new CubeCmpt();
+		break;
+	case cType::BAF:
+		c = new BAFCmpt();
 		break;
 	default:
 		break;
 	}
 	if (c == nullptr) return nullptr;
+
+	c->init(nextID, type, entity, eManager, this);
+	nextID++;
 
 	componentsToAdd.addItem(c);
     return c;
@@ -60,7 +72,7 @@ DynamicList<Component*> ComponentManager::getAllComponentsOfType(cType type)
 	return cmpts;
 }
 
-Component* ComponentManager::getComponentTypeOnEntity(cType type, Entity* entity)
+Component* ComponentManager::getComponentTypeOnEntity(cType type, const Entity* entity)
 {
 	for (unsigned int i = 0; i < components.length(); i++)
 	{
@@ -90,6 +102,7 @@ void ComponentManager::flushChanges()
 	for (unsigned int i = 0; i < componentsToAdd.length(); i++)
 	{
 		Component* c = componentsToAdd[i];
+		c->start();
 		components.addItem(c);
 	}
 	//clear "componentsToAdd" list
@@ -119,6 +132,7 @@ void ComponentManager::flushChanges()
 			components.removeIndex(index);
 		}
 
+		c->finalize();
 		delete c;
 	}
 	//clear "componentsToRemove" list
@@ -131,26 +145,29 @@ void ComponentManager::setEManager(EntityManager* _eManager)
 	eManager = _eManager;
 }
 
-ComponentManager::ComponentManager() :eManager(nullptr), nextID(unsigned int(0)) {}
+ComponentManager::ComponentManager() :eManager(nullptr), nextID(unsigned int(1)) {}
 
 ComponentManager::~ComponentManager()
 {
 	//go through all lists and clear memory
-	for (int i = 0; i < components.length(); i++)
+	for (unsigned int i = 0; i < components.length(); i++)
 	{
 		Component* c = components[i];
+		c->finalize();
 		delete c;
 	}
 
-	for (int i = 0; i < componentsToAdd.length(); i++)
+	for (unsigned int i = 0; i < componentsToAdd.length(); i++)
 	{
 		Component* c = componentsToAdd[i];
+		c->finalize();
 		delete c;
 	}
 
-	for (int i = 0; i < componentsToRemove.length(); i++)
+	for (unsigned int i = 0; i < componentsToRemove.length(); i++)
 	{
 		Component* c = componentsToRemove[i];
+		c->finalize();
 		delete c;
 	}
 
