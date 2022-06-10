@@ -114,9 +114,15 @@ int main()
 		shader.use();
 
 		Transform model = Transform::Identity() * Transform::Rotate(GLFW::getTime(), fVec3(0.5f, 1.0f, 0.0f));
-		Transform view = Transform::Identity() * Transform::Translate(fVec3(0.0f, 0.0f, -5.0f));
 		Transform proj = Transform::Identity() * Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
 
+
+		const float radius = 10.0f;
+		float camX = sin(GLFW::getTime()) * radius;
+		float camZ = cos(GLFW::getTime()) * radius;
+		//Transform view = Transform::Identity() * Transform::Translate(fVec3(0.0f, 0.0f, -5.0f));
+
+		Transform view = Transform::LookAt(fVec3(camX, 0.0, camZ), fVec3(), fVec3(0.0f, 1.0f, 0.0f));
 
 		shader.setMatrix("model", model);
 		shader.setMatrix("view", view);

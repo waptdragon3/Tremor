@@ -47,6 +47,62 @@ float& fVec3::operator[](int index)
 float fVec3::sqrMag() { return x * x + y * y + z * z; }
 float fVec3::mag() { return std::sqrt(x * x + y * y + z * z); }
 
+fVec3 fVec3::cross(fVec3 u, fVec3 v)
+{
+	float i = u[1] * v[2] - u[2] * v[1];
+	float j = u[2] * v[0] - u[0] * v[2];
+	float k = u[0] * v[1] - u[1] * v[0];
+
+	return fVec3(i, j, k);
+}
+
+float fVec3::dot(fVec3 u, fVec3 v)
+{
+	return u.x * v.x + u.y * v.y + u.z * v.z;
+}
+
+fVec3 fVec3::normalized()
+{
+	float l = this->mag();
+	return fVec3(x / l, y / l, z / l);
+}
+
+void fVec3::normalize()
+{
+	float l = this->mag();
+	x /= l;
+	y /= l;
+	z /= l;
+}
+
+fVec3& fVec3::operator+=(fVec3& r)
+{
+	this->x += r.x;
+	this->y += r.y;
+	return *this;
+}
+
+fVec3& fVec3::operator-=(fVec3& r)
+{
+	this->x -= r.x;
+	this->y -= r.y;
+	return *this;
+}
+
+fVec3& fVec3::operator*=(float r)
+{
+	this->x *= r;
+	this->y *= r;
+	return *this;
+}
+
+fVec3& fVec3::operator/=(float r)
+{
+	this->x /= r;
+	this->y /= r;
+	return *this;
+}
+
 fVec2 operator+(fVec2 u, fVec2 v) { return fVec2(u.x + v.x, u.y + v.y); }
 
 fVec2 operator-(fVec2 u, fVec2 v) {return fVec2(u.x - v.x, u.y - v.y); }
@@ -96,38 +152,6 @@ fVec3 operator/(fVec3 v, float s) { return fVec3(v.x / s, v.y / s, v.z / s); }
 
 fVec3 operator-(fVec3 v) { return fVec2(-v.x, -v.y); }
 
-fVec3& operator+=(fVec3& l, fVec3& r)
-{
-	l.x += r.x;
-	l.y += r.y;
-	l.z += r.z;
-	return l;
-}
-
-fVec3& operator-=(fVec3& l, fVec3& r)
-{
-	l.x -= r.x;
-	l.y -= r.y;
-	l.z -= r.z;
-	return l;
-}
-
-fVec3& operator*=(fVec3& l, float& r)
-{
-	l.x *= r;
-	l.y *= r;
-	l.z *= r;
-	return l;
-}
-
-fVec3& operator/=(fVec3& l, float& r)
-{
-	l.x /= r;
-	l.y /= r;
-	l.z /= r;
-	return l;
-}
-
 float degreesToRad(float degrees)
 {
 	return degrees * 3.14159f / 180.0f;
@@ -144,7 +168,7 @@ float& Transform::operator[](unsigned int index)
 	if (index < 16)
 		return items[index];
 	else
-		throw std::runtime_error("Vector index out of bounds");
+		throw std::runtime_error("Matrix index out of bounds");
 }
 
 float& Transform::get(unsigned int i, unsigned int j)
@@ -223,6 +247,36 @@ Transform Transform::Scale(fVec3 scaleFactors)
 	t.get(1, 1) = scaleFactors.y;
 	t.get(2, 2) = scaleFactors.z;
 	return t;
+}
+
+Transform Transform::LookAt(fVec3 position, fVec3 target, fVec3 up)
+{
+	Transform t1 = Transform::Identity();
+
+	up.normalize();
+
+	fVec3 f = (target - position).normalized();
+	fVec3 s = (fVec3::cross(f, up)).normalized();
+	fVec3 u = fVec3::cross(s, f);
+
+	t1.get(0, 0) = s.x;
+	t1.get(1, 0) = s.y;
+	t1.get(2, 0) = s.z;
+
+	t1.get(0, 1) = u.x;
+	t1.get(1, 1) = u.y;
+	t1.get(2, 1) = u.z;
+
+	t1.get(0, 2) = -f.x;
+	t1.get(1, 2) = -f.y;
+	t1.get(2, 2) = -f.z;
+
+	t1.get(3, 0) = -fVec3::dot(s, position);
+	t1.get(3, 1) = -fVec3::dot(u, position);
+	t1.get(3, 2) = fVec3::dot(f, position);
+
+
+	return t1;
 }
 
 Transform Transform::operator*(Transform t)

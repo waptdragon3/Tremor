@@ -26,6 +26,18 @@ struct fVec3
 	float& operator[](int index);
 	float sqrMag();
 	float mag();
+
+	static fVec3 cross(fVec3 u, fVec3 v);
+	static float dot(fVec3 u, fVec3 v);
+
+	fVec3 normalized();
+	void normalize();
+
+	//operators
+	fVec3& operator+=(fVec3& r);
+	fVec3& operator-=(fVec3& r);
+	fVec3& operator*=(float r);
+	fVec3& operator/=(float r);
 };
 
 //basic operators
@@ -49,11 +61,6 @@ fVec3 operator*(fVec3 v, float s);
 fVec3 operator/(fVec3 v, float s);
 //negate vector
 fVec3 operator-(fVec3 v);
-//assignment operators
-fVec3& operator+=(fVec3& l, fVec3& r);
-fVec3& operator-=(fVec3& l, fVec3& r);
-fVec3& operator*=(fVec3& l, float& r);
-fVec3& operator/=(fVec3& l, float& r);
 
 
 class Transform
@@ -72,6 +79,8 @@ public:
 	static Transform Rotate(float thetaRad, fVec3 axis);
 	static Transform Perspective(float fov, float aspectRatio, float near, float far);
 	static Transform Scale(fVec3 scaleFactors);
+
+	static Transform LookAt(fVec3 position, fVec3 target, fVec3 up);
 
 	Transform operator* (Transform t);
 	friend class Shader;
