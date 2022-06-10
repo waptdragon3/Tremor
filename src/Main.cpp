@@ -11,6 +11,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "core/MainManager.h"
+#include "core/TransformCmpt.h"
+
+
 
 int main()
 {
@@ -98,7 +102,14 @@ int main()
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	
+	MainManager mm;
+
+	//set up scene
+
+
+	mm.update();
+
+	printf("Num Entities: %i\n", mm.getEManager()->numEntities());
 
 	
 	while (!window.shouldClose())
@@ -137,6 +148,9 @@ int main()
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
+
+
+		mm.update();
 
 
 		GLFW::pollEvents();
