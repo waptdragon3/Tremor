@@ -103,6 +103,26 @@ fVec3& fVec3::operator/=(float r)
 	return *this;
 }
 
+fVec3 fVec3::One()
+{
+	return fVec3(1.0f, 1.0f, 1.0f);
+}
+
+fVec3 fVec3::Up()
+{
+	return fVec3(0.0f, 1.0f, 0.0f);
+}
+
+fVec3 fVec3::Right()
+{
+	return fVec3(1.0f, 0.0f, 0.0f);
+}
+
+fVec3 fVec3::Fwd()
+{
+	return fVec3(0.0f, 0.0f, 1.0f);
+}
+
 fVec2 operator+(fVec2 u, fVec2 v) { return fVec2(u.x + v.x, u.y + v.y); }
 
 fVec2 operator-(fVec2 u, fVec2 v) {return fVec2(u.x - v.x, u.y - v.y); }
@@ -177,6 +197,7 @@ float& Transform::get(unsigned int i, unsigned int j)
 	{
 		return items[i * 4 + j];
 	}
+	throw std::runtime_error("Matrix index out of bounds");
 }
 
 Transform Transform::Identity()
@@ -228,7 +249,7 @@ Transform Transform::Perspective(float fov, float aspectRatio, float near, float
 {
 	Transform t;
 	float rad = degreesToRad(fov);
-	float cot = std::cos(rad / 2.0f) / std::sin(rad / 2.0);
+	float cot = std::cos(rad / 2.0f) / std::sin(rad / 2.0f);
 
 	t.get(0, 0) = cot / aspectRatio;				//index 0
 	t.get(1, 1) = cot;								//index 5
@@ -246,6 +267,7 @@ Transform Transform::Scale(fVec3 scaleFactors)
 	t.get(0, 0) = scaleFactors.x;
 	t.get(1, 1) = scaleFactors.y;
 	t.get(2, 2) = scaleFactors.z;
+	t.get(3, 3) = 1.0f;
 	return t;
 }
 

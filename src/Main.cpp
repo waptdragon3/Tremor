@@ -80,11 +80,11 @@ int main()
 
 		
 		baf->pathStart = posA;
-		baf->pathEnd = posB;
+		baf->pathEnd = -posA;
 		baf->pathLengthTime = 2.0f;
 		
 		//transform->position = posA;
-		//transform->scale = fVec3(1.0f, 1.0f, 1.0f) * (distribution(generator) * 2);
+		transform->scale = fVec3::One() * (distribution(generator) * 0.1f);
 	}
 
 
@@ -97,6 +97,7 @@ int main()
 	shader.use();
 	shader.setMatrix("projection", proj);
 
+	Transform view = Transform::LookAt(fVec3(0.0f, 0.0f, 10.0f), fVec3(), fVec3(0.0f, 1.0f, 0.0f));
 
 	while (!window.shouldClose())
 	{
@@ -116,7 +117,6 @@ int main()
 		float camZ = cos(GLFW::getTime()) * radius;
 		//Transform view = Transform::Identity() * Transform::Translate(fVec3(0.0f, 0.0f, -5.0f));
 
-		Transform view = Transform::LookAt(fVec3(camX, 0.0, camZ), fVec3(), fVec3(0.0f, 1.0f, 0.0f));
 
 		shader.setMatrix("view", view);
 

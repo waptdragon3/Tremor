@@ -38,6 +38,11 @@ struct fVec3
 	fVec3& operator-=(fVec3& r);
 	fVec3& operator*=(float r);
 	fVec3& operator/=(float r);
+
+	static fVec3 One();
+	static fVec3 Up();
+	static fVec3 Right();
+	static fVec3 Fwd();
 };
 
 //basic operators
