@@ -10,7 +10,7 @@ float lerp(float a, float b, float f)
 
 void BAFCmpt::start()
 {
-	transform = dynamic_cast<TransformCmpt*>(cManager->getComponentTypeOnEntity(cType::Transform, controllingEntity));
+	transform = dynamic_cast<TransformCmpt*>(cManager->getComponentTypeOnEntity<TransformCmpt>(controllingEntity));
 }
 
 void BAFCmpt::update()

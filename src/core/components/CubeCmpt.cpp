@@ -62,7 +62,7 @@ void CubeCmpt::start()
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(fVec3)));
 	glEnableVertexAttribArray(1);
 
-	transform = dynamic_cast<TransformCmpt*>(cManager->getComponentTypeOnEntity(cType::Transform, controllingEntity));
+	transform = cManager->getComponentTypeOnEntity<TransformCmpt>(controllingEntity);
 }
 
 void CubeCmpt::update()

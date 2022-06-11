@@ -66,12 +66,12 @@ int main()
 
 	float radius = 2;
 	//set up scene
-	for(int i = 0; i < 5000; i++)
+	for(int i = 0; i < 1000; i++)
 	{
 		Entity* e = mm.getEManager()->makeEntity();
-		TransformCmpt* transform = dynamic_cast<TransformCmpt*>(mm.getCManager()->makeComponent(cType::Transform, e));
-		CubeCmpt* cube = dynamic_cast<CubeCmpt*>(mm.getCManager()->makeComponent(cType::Cube, e));
-		BAFCmpt* baf = dynamic_cast<BAFCmpt*>(mm.getCManager()->makeComponent(cType::BAF, e));
+		TransformCmpt* transform = mm.getCManager()->makeComponent<TransformCmpt>(e);
+		CubeCmpt* cube = mm.getCManager()->makeComponent<CubeCmpt>(e);
+		BAFCmpt* baf = mm.getCManager()->makeComponent<BAFCmpt>(e);
 
 		cube->shader = &shader;
 

@@ -1,4 +1,5 @@
 #include "core/EntityManager.h"
+#include "core/ComponentManager.h"
 
 Entity* EntityManager::makeEntity()
 {
@@ -36,7 +37,11 @@ uint32_t EntityManager::numEntities()
 void EntityManager::flushChanges()
 {
 	//remove all components from the "entitiesToRemove" list
-
+	for (int i = 0; i < entitiesToRemove.length(); i++)
+	{
+		Entity* e = entitiesToRemove[i];
+		cManager->removeComponentsFromEntity(e);
+	}
 
 	//add all entities in the "entitiesToAdd" list
 	for (unsigned int i = 0; i < entitiesToAdd.length(); i++)
