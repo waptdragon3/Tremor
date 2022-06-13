@@ -1,26 +1,26 @@
 #include <glad/glad.h>
 
-#include "VMath.h"
-#include "graphics/GLFW.h"
-#include "graphics/Window.h"
-#include "graphics/Shader.h"
-#include "graphics/Texture.h"
+#include "w3d/math/fVec3.h"
+#include "w3d/graphics/GLFW.h"
+#include "w3d/graphics/Window.h"
+#include "w3d/graphics/Shader.h"
+#include "w3d/graphics/Texture.h"
 
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "core/MainManager.h"
-#include "core/components/TransformCmpt.h"
-#include "core/components/CubeCmpt.h"
-#include "core/components/BackAndForthCmpt.h"
-#include "core/components/LimitedLifeSpanCmpt.h"
+#include "w3d/component/MainManager.h"
+#include "components/TransformCmpt.h"
+#include "components/CubeCmpt.h"
+#include "components/BackAndForthCmpt.h"
+#include "components/LimitedLifeSpanCmpt.h"
 
 
 #include <random>
 
-W3D::fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution);
+W3D::Math::fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution);
 
 int main()
 {
@@ -80,8 +80,8 @@ int main()
 
 		cube->shader = &shader;
 
-		W3D::fVec3 posA = randOnSphere(radius, &generator, &distribution);
-		W3D::fVec3 posB = randOnSphere(radius, &generator, &distribution);
+		W3D::Math::fVec3 posA = randOnSphere(radius, &generator, &distribution);
+		W3D::Math::fVec3 posB = randOnSphere(radius, &generator, &distribution);
 
 		
 		baf->pathStart = posA;
@@ -89,7 +89,7 @@ int main()
 		baf->pathLengthTime = 2.0f;
 		
 		//transform->position = posA;
-		transform->scale = W3D::fVec3::One() * (distribution(generator) * 0.1f);
+		transform->scale = W3D::Math::fVec3::One() * (distribution(generator) * 0.1f);
 
 		//random number between 5 and 15
 		lifeSpan->time = distribution2(generator);
@@ -103,7 +103,7 @@ int main()
 
 	shader.use();
 	
-	W3D::Transform proj = W3D::Transform::Identity() * W3D::Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
+	W3D::Math::Transform proj = W3D::Math::Transform::Identity() * W3D::Math::Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
 	shader.setMatrix("projection", proj);
 
 
@@ -112,18 +112,11 @@ int main()
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		
-		W3D::fVec3 offset;
-		offset = offset + W3D::fVec3(3.0f, 0.0f, 0.0f) * static_cast<float>(sin(W3D::Graphics::GLFW::getTime()));
-		offset = offset + W3D::fVec3(0.0f, 3.0f, 0.0f) * static_cast<float>(cos(W3D::Graphics::GLFW::getTime()));
-
-
-
 
 		const float radius = 10.0f;
 		float camX = sin(W3D::Graphics::GLFW::getTime()) * radius;
 		float camZ = cos(W3D::Graphics::GLFW::getTime()) * radius;
-		W3D::Transform view = W3D::Transform::Identity() * W3D::Transform::Translate(W3D::fVec3(0.0f, 0.0f, -5.0f));
+		W3D::Math::Transform view = W3D::Math::Transform::Identity() * W3D::Math::Transform::Translate(W3D::Math::fVec3(0.0f, 0.0f, -5.0f));
 		//Transform view = Transform::LookAt(fVec3(camX, 0.0f, camZ), fVec3(), fVec3(0.0f, 1.0f, 0.0f));
 
 		shader.setMatrix("view", view);
@@ -140,14 +133,14 @@ int main()
 	return 0;
 }
 
-W3D::fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution)
+W3D::Math::fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution)
 {
 	float u = distribution->operator()(*generator);
 	float v = distribution->operator()(*generator);
 
 	float theta = 2 * 3.14159f * u;
 	float phi = std::acosf(2 * v - 1);
-	W3D::fVec3 pos;
+	W3D::Math::fVec3 pos;
 	pos.x = radius * std::sin(phi) * std::cos(theta);
 	pos.y = radius * std::sin(phi) * std::sin(theta);
 	pos.z = radius * std::cos(phi);
