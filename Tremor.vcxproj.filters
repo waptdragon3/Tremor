@@ -77,6 +77,9 @@
     <ClCompile Include="src\w3d\math\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\w3d\input\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\w3d\graphics\GLFW.h">
@@ -139,7 +142,7 @@
     <ClInclude Include="include\components\LimitedLifeSpanCmpt.h">
       <Filter>Header Files\core\components</Filter>
     </ClInclude>
-    <ClInclude Include="include\w3d\input\Keyboard.h">
+    <ClInclude Include="include\w3d\input\Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\w3d\math\fVec3.h">

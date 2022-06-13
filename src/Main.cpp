@@ -6,6 +6,7 @@
 #include "w3d/graphics/Shader.h"
 #include "w3d/graphics/Texture.h"
 
+#include "w3d/input/Input.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -64,6 +65,11 @@ int main()
 	std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
 	std::uniform_real_distribution<float> distribution2(10.0f, 15.0f);
 
+	W3D::Input::Keyboard::Monitor(&window);
+
+	W3D::Input::Keyboard::addInput("forward", W3D::Input::Keycode::W);
+
+
 
 	W3D::Components::MainManager mm;
 
@@ -121,11 +127,18 @@ int main()
 
 		shader.setMatrix("view", view);
 
+		//printf("%i", W3D::Input::Keyboard::getInput("forward"));
+
+		if (W3D::Input::Keyboard::getInput("forward") == W3D::Input::InputState::Pressed)
+		{
+			printf("W");
+		}
 
 		t.bind();
 		mm.update();
 
 
+		W3D::Input::Keyboard::update();
 		W3D::Graphics::GLFW::pollEvents();
 		window.swapBuffers();
 	}

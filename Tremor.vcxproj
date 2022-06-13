@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\w3d\input\Input.cpp" />
     <ClCompile Include="src\w3d\math\fVec2.cpp" />
     <ClCompile Include="src\w3d\math\fVec3.cpp" />
     <ClCompile Include="src\components\BackAndForthCmpt.cpp" />
@@ -192,7 +193,7 @@
     <ClInclude Include="include\w3d\component\MainManager.h" />
     <ClInclude Include="include\components\TransformCmpt.h" />
     <ClInclude Include="include\w3d\graphics\GLFW.h" />
-    <ClInclude Include="include\w3d\input\Keyboard.h" />
+    <ClInclude Include="include\w3d\input\Input.h" />
     <ClInclude Include="include\w3d\graphics\stb_image.h" />
     <ClInclude Include="include\w3d\graphics\Texture.h" />
     <ClInclude Include="include\w3d\graphics\Shader.h" />
