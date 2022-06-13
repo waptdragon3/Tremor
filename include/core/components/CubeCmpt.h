@@ -4,15 +4,15 @@
 #include "VMath.h"
 #include "graphics/Shader.h"
 
-struct CubeCmpt :public Component
+struct CubeCmpt :public W3D::Components::Component
 {
 private:
 	struct Vertex
 	{
-		fVec3 position;
-		fVec2 UV;
+		W3D::fVec3 position;
+		W3D::fVec2 UV;
 		Vertex();
-		Vertex(fVec3 pos, fVec2 uv);
+		Vertex(W3D::fVec3 pos, W3D::fVec2 uv);
 	};
 
 	Vertex vertices[8];
@@ -25,5 +25,5 @@ public:
 	void start() override;
 	void update() override;
 	void finalize() override;
-	Shader* shader;
+	W3D::Graphics::Shader* shader;
 };

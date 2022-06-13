@@ -1,27 +1,31 @@
 #include "graphics/Window.h"
 #include <GLFW/glfw3.h>
 
-Window::Window(int width, int height, const char* name)
+namespace W3D::Graphics
 {
-	//create window
-	pWindow = glfwCreateWindow(width, height, name, nullptr, nullptr);
 
-	//set user pointer
-	userInfo.window = this;
-	glfwSetWindowUserPointer(pWindow, (void*)&userInfo);
-}
+	Window::Window(int width, int height, const char* name)
+	{
+		//create window
+		pWindow = glfwCreateWindow(width, height, name, nullptr, nullptr);
 
-void Window::makeCurrentContext()
-{
-	glfwMakeContextCurrent(pWindow);
-}
+		//set user pointer
+		userInfo.window = this;
+		glfwSetWindowUserPointer(pWindow, (void*)&userInfo);
+	}
 
-void Window::swapBuffers()
-{
-	glfwSwapBuffers(pWindow);
-}
+	void Window::makeCurrentContext()
+	{
+		glfwMakeContextCurrent(pWindow);
+	}
 
-bool Window::shouldClose()
-{
-	return glfwWindowShouldClose(pWindow);
+	void Window::swapBuffers()
+	{
+		glfwSwapBuffers(pWindow);
+	}
+
+	bool Window::shouldClose()
+	{
+		return glfwWindowShouldClose(pWindow);
+	}
 }

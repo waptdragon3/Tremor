@@ -21,11 +21,11 @@
     <Filter Include="Header Files\core">
       <UniqueIdentifier>{6c9b3137-1e63-4c47-aaab-874154760a71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\components">
-      <UniqueIdentifier>{cb4dac23-4e9c-4c3f-aeb5-17b99df91cb3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\core\components">
       <UniqueIdentifier>{bfc2689e-c8be-4e3d-b174-f978fa91d5d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core\components">
+      <UniqueIdentifier>{cb4dac23-4e9c-4c3f-aeb5-17b99df91cb3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +91,6 @@
     <ClInclude Include="include\graphics\stb_image.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="include\core\MainManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\core\Component.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
@@ -110,13 +107,34 @@
       <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="include\core\components\TransformCmpt.h">
-      <Filter>Header Files\components</Filter>
+      <Filter>Header Files\core\components</Filter>
     </ClInclude>
     <ClInclude Include="include\core\components\BackAndForthCmpt.h">
-      <Filter>Header Files\components</Filter>
+      <Filter>Header Files\core\components</Filter>
     </ClInclude>
     <ClInclude Include="include\core\components\CubeCmpt.h">
-      <Filter>Header Files\components</Filter>
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\components\CameraControllerCmpt.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\Camera.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\components\InputListener.h">
+      <Filter>Header Files\core\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\MainManager.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\components\KeyboardInput.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\components\MouseInput.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\components\LimitedLifeSpanCmpt.h">
+      <Filter>Header Files\core\components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

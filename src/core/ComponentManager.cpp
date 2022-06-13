@@ -1,58 +1,63 @@
 #include "core/ComponentManager.h"
 
-void ComponentManager::removeComponent(Component* c)
+namespace W3D::Components
 {
-	auto it = componentLists.begin();
-	while (it != componentLists.end())
-	{
-		it->second->removeComponent(c);
-	}
-}
 
-void ComponentManager::update()
-{
-	auto it = componentLists.begin();
-	while (it != componentLists.end())
+	void ComponentManager::removeComponent(Component* c)
 	{
-		it->second->update();
-		it++;
-	}
-}
-
-void ComponentManager::flushChanges()
-{
-	auto it = componentLists.begin();
-	while (it != componentLists.end())
-	{
-		it->second->flushChanges();
-		it++;
+		auto it = componentLists.begin();
+		while (it != componentLists.end())
+		{
+			it->second->removeComponent(c);
+		}
 	}
 
-}
-
-void ComponentManager::setEManager(EntityManager* _eManager)
-{
-	eManager = _eManager;
-}
-
-void ComponentManager::removeComponentsFromEntity(Entity* e)
-{
-	auto it = componentLists.begin();
-	while (it != componentLists.end())
+	void ComponentManager::update()
 	{
-		it->second->removeComponentsFromEntity(e);
-		it++;
+		auto it = componentLists.begin();
+		while (it != componentLists.end())
+		{
+			it->second->update();
+			it++;
+		}
 	}
-}
 
-ComponentManager::ComponentManager() :eManager(nullptr), nextID(unsigned int(1)) {}
-
-ComponentManager::~ComponentManager()
-{
-	auto it = componentLists.begin();
-	while (it != componentLists.end())
+	void ComponentManager::flushChanges()
 	{
-		delete (it->second);
-		it++;
+		auto it = componentLists.begin();
+		while (it != componentLists.end())
+		{
+			it->second->flushChanges();
+			it++;
+		}
+
 	}
+
+	void ComponentManager::setEManager(EntityManager* _eManager)
+	{
+		eManager = _eManager;
+	}
+
+	void ComponentManager::removeComponentsFromEntity(Entity* e)
+	{
+		auto it = componentLists.begin();
+		while (it != componentLists.end())
+		{
+			it->second->removeComponentsFromEntity(e);
+			it++;
+		}
+	}
+
+	ComponentManager::ComponentManager() :eManager(nullptr), nextID(unsigned int(1)) {}
+
+	ComponentManager::~ComponentManager()
+	{
+		auto it = componentLists.begin();
+		while (it != componentLists.end())
+		{
+			delete (it->second);
+			it++;
+		}
+	}
+
 }

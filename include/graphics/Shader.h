@@ -1,23 +1,31 @@
 #pragma once
 #include <string>
-class Transform;
-class Shader
+
+namespace W3D
 {
-public:
-    // the program ID
-    unsigned int ID;
+    class Transform;
+}
 
-    // constructor reads and builds the shader
-    Shader(const char* vertexCode, const char* fragmentCode);
-    // use/activate the shader
-    void use();
-    // utility uniform functions
-    void setBool(const std::string& name, bool value) const;
-    void setInt(const std::string& name, int value) const;
-    void setFloat(const std::string& name, float value) const;
+namespace W3D::Graphics
+{
+    class Shader
+    {
+    public:
+        // the program ID
+        unsigned int ID;
 
-    void setMatrix(const std::string& name, Transform value) const;
+        // constructor reads and builds the shader
+        Shader(const char* vertexCode, const char* fragmentCode);
+        // use/activate the shader
+        void use();
+        // utility uniform functions
+        void setBool(const std::string& name, bool value) const;
+        void setInt(const std::string& name, int value) const;
+        void setFloat(const std::string& name, float value) const;
 
-    static Shader fromFile(const char* vertexPath, const char* fragmentPath);
-};
+        void setMatrix(const std::string& name, W3D::Transform value) const;
 
+        static Shader fromFile(const char* vertexPath, const char* fragmentPath);
+    };
+
+}

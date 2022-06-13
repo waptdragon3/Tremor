@@ -1,31 +1,36 @@
 #include "core/Component.h"
 
-void Component::init(cID _id, Entity* _controllingEntity, EntityManager* _eManager, ComponentManager* _cManager)
+namespace W3D::Components
 {
-	ID = _id;
-	controllingEntity = _controllingEntity;
-	eManager = _eManager;
-	cManager = _cManager;
-}
 
-cID Component::getID()
-{
-	return ID;
-}
+	void Component::init(ComponentID _id, Entity* _controllingEntity, EntityManager* _eManager, ComponentManager* _cManager)
+	{
+		ID = _id;
+		controllingEntity = _controllingEntity;
+		eManager = _eManager;
+		cManager = _cManager;
+	}
 
-Component::Component()
-{
-	controllingEntity = nullptr;
-	eManager = nullptr;
-	cManager = nullptr;
-	ID = 0;
-}
+	ComponentID Component::getID()
+	{
+		return ID;
+	}
 
-void Component::update() {}
-void Component::start() {}
-void Component::finalize() {}
+	Component::Component()
+	{
+		controllingEntity = nullptr;
+		eManager = nullptr;
+		cManager = nullptr;
+		ID = 0;
+	}
 
-Entity* Component::getControllingEntity()
-{
-	return controllingEntity;
+	void Component::update() {}
+	void Component::start() {}
+	void Component::finalize() {}
+
+	Entity* Component::getControllingEntity()
+	{
+		return controllingEntity;
+	}
+
 }

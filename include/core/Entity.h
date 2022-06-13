@@ -1,21 +1,25 @@
 #pragma once
 
-typedef unsigned int eID;
-class EntityManager;
-class ComponentManager;
-
-
-struct Entity
+namespace W3D::Components
 {
-private:
-	const EntityManager* eManager;
-	const ComponentManager* cManager;
-	Entity(eID _id, EntityManager* _eManager, ComponentManager* _cManager);
-	friend class EntityManager;
-public:
-	const eID ID;
-	bool enabled = true;
-	Entity() = delete;
-};
 
-bool operator==(Entity e1, Entity e2);
+	using EntityID = unsigned long long;
+	class EntityManager;
+	class ComponentManager;
+
+
+	struct Entity
+	{
+	private:
+		const EntityManager* eManager;
+		const ComponentManager* cManager;
+		Entity(EntityID _id, EntityManager* _eManager, ComponentManager* _cManager);
+		friend class EntityManager;
+	public:
+		const EntityID ID;
+		bool enabled = true;
+		Entity() = delete;
+	};
+
+	bool operator==(Entity e1, Entity e2);
+}

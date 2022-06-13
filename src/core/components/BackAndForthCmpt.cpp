@@ -15,9 +15,9 @@ void BAFCmpt::start()
 
 void BAFCmpt::update()
 {
-	fVec3 pos;
-	int numCycles = static_cast<int>(GLFW::getTime() / pathLengthTime);
-	float f = GLFW::getTime() - (pathLengthTime * numCycles);
+	W3D::fVec3 pos;
+	int numCycles = static_cast<int>(W3D::Graphics::GLFW::getTime() / pathLengthTime);
+	float f = W3D::Graphics::GLFW::getTime() - (pathLengthTime * numCycles);
 	float rads = (f / pathLengthTime) * 2 * 3.14159f;
 	float t = (std::sin(rads) + 1) / 2;
 	pos.x = lerp(pathStart.x, pathEnd.x, t);

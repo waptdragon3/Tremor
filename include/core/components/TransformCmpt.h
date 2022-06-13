@@ -5,22 +5,22 @@
 #include "VMath.h"
 
 
-struct TransformCmpt : public Component
+struct TransformCmpt : public W3D::Components::Component
 {
 public:
-	fVec3 position;
-	fVec3 scale = fVec3::One();
+	W3D::fVec3 position;
+	W3D::fVec3 scale = W3D::fVec3::One();
 
 	void start()
 	{
 
 	}
 
-	Transform getTransform()
+	W3D::Transform getTransform()
 	{
-		Transform t = Transform::Identity();
+		W3D::Transform t = W3D::Transform::Identity();
 		
-		t = t * Transform::Scale(scale) * Transform::Translate(position) ;
+		t = t * W3D::Transform::Scale(scale) * W3D::Transform::Translate(position) ;
 
 		return t;
 	}

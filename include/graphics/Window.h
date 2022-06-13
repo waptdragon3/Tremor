@@ -1,25 +1,30 @@
 #pragma once
+
 struct GLFWwindow;
-
-class Window
+namespace W3D::Graphics
 {
-public:
 
-	Window(int width, int height, const char* name);
-
-	void makeCurrentContext();
-
-	void swapBuffers();
-
-	bool shouldClose();
-
-
-private:
-	struct glfwWindowUserInfo
+	class Window
 	{
-		Window* window;
+	public:
+
+		Window(int width, int height, const char* name);
+
+		void makeCurrentContext();
+
+		void swapBuffers();
+
+		bool shouldClose();
+
+
+	private:
+		struct glfwWindowUserInfo
+		{
+			Window* window;
+		};
+
+		GLFWwindow* pWindow;
+		glfwWindowUserInfo userInfo;
 	};
 
-	GLFWwindow* pWindow;
-	glfwWindowUserInfo userInfo;
-};
+}

@@ -1,116 +1,121 @@
 #include "core/EntityManager.h"
 #include "core/ComponentManager.h"
 
-Entity* EntityManager::makeEntity()
+namespace W3D::Components
 {
-	Entity* e = new Entity(nextID, this, cManager);
-	entitiesToAdd.addItem(e);
-	nextID++;
-	return e;
-}
 
-void EntityManager::removeEntity(Entity* e)
-{
-	entitiesToRemove.addItem(e);
-}
-
-Entity* EntityManager::getEntity(eID id)
-{
-	for (int i = 0; i < entities.length(); i++)
+	Entity* EntityManager::makeEntity()
 	{
-		Entity* e = entities[i];
-		if (e->ID == id)
-			return e;
-	}
-	return nullptr;
-}
-
-void EntityManager::update()
-{
-}
-
-uint32_t EntityManager::numEntities()
-{
-	return entities.length();
-}
-
-void EntityManager::flushChanges()
-{
-	//remove all components from the "entitiesToRemove" list
-	for (int i = 0; i < entitiesToRemove.length(); i++)
-	{
-		Entity* e = entitiesToRemove[i];
-		cManager->removeComponentsFromEntity(e);
+		Entity* e = new Entity(nextID, this, cManager);
+		entitiesToAdd.addItem(e);
+		nextID++;
+		return e;
 	}
 
-	//add all entities in the "entitiesToAdd" list
-	for (unsigned int i = 0; i < entitiesToAdd.length(); i++)
+	void EntityManager::removeEntity(Entity* e)
 	{
-		Entity* e = entitiesToAdd[i];
-		entities.addItem(e);
+		entitiesToRemove.addItem(e);
 	}
-	//clear "entitiesToAdd" list
-	entitiesToAdd.clear();
 
-	//remove all entities in the "entitiesToRemove" list
-	for (unsigned int i = 0; i < entitiesToRemove.length(); i++)
+	Entity* EntityManager::getEntity(EntityID id)
 	{
-		Entity* e = entitiesToRemove[i];
-
-		//find index of e
-		bool found = false;
-		uint32_t index = 0;
-		for (unsigned int j = 0; j < entities.length(); j++)
+		for (unsigned int i = 0; i < entities.length(); i++)
 		{
-			Entity* e2 = entities[j];
-			if (e->ID == e2->ID)
+			Entity* e = entities[i];
+			if (e->ID == id)
+				return e;
+		}
+		return nullptr;
+	}
+
+	void EntityManager::update()
+	{
+	}
+
+	uint32_t EntityManager::numEntities()
+	{
+		return entities.length();
+	}
+
+	void EntityManager::flushChanges()
+	{
+		//remove all components from the "entitiesToRemove" list
+		for (unsigned int i = 0; i < entitiesToRemove.length(); i++)
+		{
+			Entity* e = entitiesToRemove[i];
+			cManager->removeComponentsFromEntity(e);
+		}
+
+		//add all entities in the "entitiesToAdd" list
+		for (unsigned int i = 0; i < entitiesToAdd.length(); i++)
+		{
+			Entity* e = entitiesToAdd[i];
+			entities.addItem(e);
+		}
+		//clear "entitiesToAdd" list
+		entitiesToAdd.clear();
+
+		//remove all entities in the "entitiesToRemove" list
+		for (unsigned int i = 0; i < entitiesToRemove.length(); i++)
+		{
+			Entity* e = entitiesToRemove[i];
+
+			//find index of e
+			bool found = false;
+			uint32_t index = 0;
+			for (unsigned int j = 0; j < entities.length(); j++)
 			{
-				found = true;
-				index = j;
-				break;
+				Entity* e2 = entities[j];
+				if (e->ID == e2->ID)
+				{
+					found = true;
+					index = j;
+					break;
+				}
 			}
+			//if we found the entity
+			if (found)
+			{
+				entities.removeIndex(index);
+			}
+
+			delete e;
 		}
-		//if we found the entity
-		if (found)
+		//clear "entitiesToRemove" list
+		entitiesToRemove.clear();
+	}
+
+	void EntityManager::setCManager(ComponentManager* _cManager)
+	{
+		cManager = _cManager;
+	}
+
+	EntityManager::EntityManager():cManager(nullptr), nextID(unsigned int (0)) {}
+
+	EntityManager::~EntityManager()
+	{
+		//go through all lists and clear memory
+		for (unsigned int i = 0; i < entities.length(); i++)
 		{
-			entities.removeIndex(index);
+			Entity* c = entities[i];
+			delete c;
 		}
 
-		delete e;
-	}
-	//clear "entitiesToRemove" list
-	entitiesToRemove.clear();
-}
+		for (unsigned int i = 0; i < entitiesToAdd.length(); i++)
+		{
+			Entity* c = entitiesToAdd[i];
+			delete c;
+		}
 
-void EntityManager::setCManager(ComponentManager* _cManager)
-{
-	cManager = _cManager;
-}
+		for (unsigned int i = 0; i < entitiesToRemove.length(); i++)
+		{
+			Entity* c = entitiesToRemove[i];
+			delete c;
+		}
 
-EntityManager::EntityManager():cManager(nullptr), nextID(unsigned int (0)) {}
-
-EntityManager::~EntityManager()
-{
-	//go through all lists and clear memory
-	for (int i = 0; i < entities.length(); i++)
-	{
-		Entity* c = entities[i];
-		delete c;
+		entities.clear();
+		entitiesToAdd.clear();
+		entitiesToRemove.clear();
 	}
 
-	for (int i = 0; i < entitiesToAdd.length(); i++)
-	{
-		Entity* c = entitiesToAdd[i];
-		delete c;
-	}
-
-	for (int i = 0; i < entitiesToRemove.length(); i++)
-	{
-		Entity* c = entitiesToRemove[i];
-		delete c;
-	}
-
-	entities.clear();
-	entitiesToAdd.clear();
-	entitiesToRemove.clear();
 }

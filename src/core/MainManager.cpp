@@ -1,27 +1,32 @@
 #include "core/MainManager.h"
 
-MainManager::MainManager()
+namespace W3D::Components
 {
-	eManager.setCManager(&cManager);
 
-	cManager.setEManager(&eManager);
-}
+	MainManager::MainManager()
+	{
+		eManager.setCManager(&cManager);
 
-EntityManager* MainManager::getEManager()
-{
-	return &eManager;
-}
+		cManager.setEManager(&eManager);
+	}
 
-ComponentManager* MainManager::getCManager()
-{
-	return &cManager;
-}
+	EntityManager* MainManager::getEManager()
+	{
+		return &eManager;
+	}
 
-void MainManager::update()
-{
-	eManager.update();
-	cManager.update();
+	ComponentManager* MainManager::getCManager()
+	{
+		return &cManager;
+	}
 
-	eManager.flushChanges();
-	cManager.flushChanges();
+	void MainManager::update()
+	{
+		eManager.update();
+		cManager.update();
+
+		eManager.flushChanges();
+		cManager.flushChanges();
+	}
+
 }

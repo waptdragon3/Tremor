@@ -1,20 +1,22 @@
 #pragma once
 
-
-class Texture
+namespace W3D::Graphics
 {
-public:
-	Texture(const char* fileName);
-	void bind();
-private:
-	int width, height;
-	unsigned int OGLtextureID;
-};
+	class Texture
+	{
+	public:
+		Texture(const char* fileName);
+		void bind();
+	private:
+		int width, height;
+		unsigned int OGLtextureID;
+	};
 
-class TextureManager
-{
-public:
+	class TextureManager
+	{
+	public:
 
-private:
+	private:
 
-};
+	};
+}

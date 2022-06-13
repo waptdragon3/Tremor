@@ -8,15 +8,15 @@ void CubeCmpt::start()
 	//initialize vertices and indices
 	{
 		numVertices = 8;
-		vertices[0] = Vertex(fVec3(0.5f, 0.5f, -0.5f), fVec2(1.0f, 1.0f));
-		vertices[1] = Vertex(fVec3(0.5f, -0.5f, -0.5f), fVec2(0.0f, 1.0f));
-		vertices[2] = Vertex(fVec3(-0.5f, -0.5f, -0.5f), fVec2(0.0f, 0.0f));
-		vertices[3] = Vertex(fVec3(-0.5f, 0.5f, -0.5f), fVec2(0.0f, 1.0f));
+		vertices[0] = Vertex(W3D::fVec3(0.5f, 0.5f, -0.5f), W3D::fVec2(1.0f, 1.0f));
+		vertices[1] = Vertex(W3D::fVec3(0.5f, -0.5f, -0.5f), W3D::fVec2(0.0f, 1.0f));
+		vertices[2] = Vertex(W3D::fVec3(-0.5f, -0.5f, -0.5f), W3D::fVec2(0.0f, 0.0f));
+		vertices[3] = Vertex(W3D::fVec3(-0.5f, 0.5f, -0.5f), W3D::fVec2(0.0f, 1.0f));
 
-		vertices[4] = Vertex(fVec3(0.5f, 0.5f, 0.5f), fVec2(0.0f, 0.0f));
-		vertices[5] = Vertex(fVec3(0.5f, -0.5f, 0.5f), fVec2(1.0f, 1.0f));
-		vertices[6] = Vertex(fVec3(-0.5f, -0.5f, 0.5f), fVec2(1.0f, 0.0f));
-		vertices[7] = Vertex(fVec3(-0.5f, 0.5f, 0.5f), fVec2(0.0f, 1.0f));
+		vertices[4] = Vertex(W3D::fVec3(0.5f, 0.5f, 0.5f), W3D::fVec2(0.0f, 0.0f));
+		vertices[5] = Vertex(W3D::fVec3(0.5f, -0.5f, 0.5f), W3D::fVec2(1.0f, 1.0f));
+		vertices[6] = Vertex(W3D::fVec3(-0.5f, -0.5f, 0.5f), W3D::fVec2(1.0f, 0.0f));
+		vertices[7] = Vertex(W3D::fVec3(-0.5f, 0.5f, 0.5f), W3D::fVec2(0.0f, 1.0f));
 
 
 		unsigned int _indices[36] = {  // note that we start from 0!
@@ -59,7 +59,7 @@ void CubeCmpt::start()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
 	glEnableVertexAttribArray(0);
 	//set UV coords
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(fVec3)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(W3D::fVec3)));
 	glEnableVertexAttribArray(1);
 
 	transform = cManager->getComponentTypeOnEntity<TransformCmpt>(controllingEntity);
@@ -67,7 +67,7 @@ void CubeCmpt::start()
 
 void CubeCmpt::update()
 {
-	Transform t = transform->getTransform();
+	W3D::Transform t = transform->getTransform();
 	shader->use();
 	shader->setMatrix("model", t);
 
@@ -85,6 +85,6 @@ CubeCmpt::Vertex::Vertex()
 {
 }
 
-CubeCmpt::Vertex::Vertex(fVec3 pos, fVec2 uv): position(pos), UV(uv)
+CubeCmpt::Vertex::Vertex(W3D::fVec3 pos, W3D::fVec2 uv): position(pos), UV(uv)
 {
 }

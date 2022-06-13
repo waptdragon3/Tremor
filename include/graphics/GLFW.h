@@ -1,12 +1,16 @@
 #pragma once
-class Window;
-namespace GLFW
+
+namespace W3D::Graphics
 {
-	int init();
+	class Window;
+	namespace GLFW
+	{
+		int init();
 
-	void cleanUp();
+		void cleanUp();
 
-	void pollEvents();
+		void pollEvents();
 
-	float getTime();
+		float getTime();
+	}
 }

@@ -3,12 +3,12 @@
 #include "core/components/TransformCmpt.h"
 #include "VMath.h"
 
-struct BAFCmpt :public Component
+struct BAFCmpt :public W3D::Components::Component
 {
 private:
 	TransformCmpt* transform;
 public:
-	fVec3 pathStart, pathEnd;
+	W3D::fVec3 pathStart, pathEnd;
 	float pathLengthTime;
 	void start() override;
 	void update() override;

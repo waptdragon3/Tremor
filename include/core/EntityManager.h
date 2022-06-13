@@ -2,35 +2,38 @@
 #include "core/DynamicList.h"
 #include "core/Entity.h"
 
-class EntityManager
+namespace W3D::Components
 {
-private:
-	DynamicList<Entity*> entities;
-	DynamicList<Entity*> entitiesToRemove;
-	DynamicList<Entity*> entitiesToAdd;
-	eID nextID;
-	ComponentManager* cManager;
+	class EntityManager
+	{
+	private:
+		DynamicList<Entity*> entities;
+		DynamicList<Entity*> entitiesToRemove;
+		DynamicList<Entity*> entitiesToAdd;
+		EntityID nextID;
+		ComponentManager* cManager;
 
-public:
-	//Creates an Entity and adds it to the "entitiesToAdd" list
-	Entity* makeEntity();
-	//adds an entity to the "entitiesToRemove" list
-	void removeEntity(Entity* e);
-	//Shouldnt be needed, but just in case
-	//Retrieves an existing entity by its ID
-	Entity* getEntity(eID id);
-	void update();
+	public:
+		//Creates an Entity and adds it to the "entitiesToAdd" list
+		Entity* makeEntity();
+		//adds an entity to the "entitiesToRemove" list
+		void removeEntity(Entity* e);
+		//Shouldnt be needed, but just in case
+		//Retrieves an existing entity by its ID
+		Entity* getEntity(EntityID id);
+		void update();
 
-	uint32_t numEntities();
-	
-private:
-	//removes all entities in the "entitiesToRemove" list, and adds all in the "entitiesToAdd" list
-	//removes all components from entities in the "entitiesToRemove" list
-	void flushChanges();
-	void setCManager(ComponentManager* _cManager);
+		uint32_t numEntities();
 
-	EntityManager();
-	~EntityManager();
+	private:
+		//removes all entities in the "entitiesToRemove" list, and adds all in the "entitiesToAdd" list
+		//removes all components from entities in the "entitiesToRemove" list
+		void flushChanges();
+		void setCManager(ComponentManager* _cManager);
 
-	friend class MainManager;
-};
+		EntityManager();
+		~EntityManager();
+
+		friend class MainManager;
+	};
+}

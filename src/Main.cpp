@@ -15,16 +15,18 @@
 #include "core/components/TransformCmpt.h"
 #include "core/components/CubeCmpt.h"
 #include "core/components/BackAndForthCmpt.h"
+#include "core/components/LimitedLifeSpanCmpt.h"
+
 
 #include <random>
 
-fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution);
+W3D::fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution);
 
 int main()
 {
-	GLFW::init();
+	W3D::Graphics::GLFW::init();
 	
-	Window window(1280, 720, "Tremor");
+	W3D::Graphics::Window window(1280, 720, "Tremor");
 	window.makeCurrentContext();
 
 
@@ -32,7 +34,7 @@ int main()
 	glViewport(0, 0, 1280, 720);
 	glEnable(GL_DEPTH_TEST);
 
-	Texture t("resources/textures/Shadowfell.jpg");
+	W3D::Graphics::Texture t("resources/textures/Shadowfell.jpg");
 
 	const char* vertexShaderSource = "#version 330 core\n"
 		"layout(location = 0) in vec3 aPos;\n"
@@ -56,35 +58,42 @@ int main()
 		"	FragColor = texture(ourTexture, TexCoord);\n"
 		"}\0";
 
-	Shader shader(vertexShaderSource, fragmentShaderSource);
+	W3D::Graphics::Shader shader(vertexShaderSource, fragmentShaderSource);
 
 	std::default_random_engine generator;
 	std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
+	std::uniform_real_distribution<float> distribution2(10.0f, 15.0f);
 
 
-	MainManager mm;
+	W3D::Components::MainManager mm;
 
 	float radius = 2;
 	//set up scene
 	for(int i = 0; i < 1000; i++)
 	{
-		Entity* e = mm.getEManager()->makeEntity();
+		W3D::Components::Entity* e = mm.getEManager()->makeEntity();
 		TransformCmpt* transform = mm.getCManager()->makeComponent<TransformCmpt>(e);
 		CubeCmpt* cube = mm.getCManager()->makeComponent<CubeCmpt>(e);
 		BAFCmpt* baf = mm.getCManager()->makeComponent<BAFCmpt>(e);
+		LimitedLifeSpaceCmpt* lifeSpan = mm.getCManager()->makeComponent<LimitedLifeSpaceCmpt>(e);
+
 
 		cube->shader = &shader;
 
-		fVec3 posA = randOnSphere(radius, &generator, &distribution);
-		fVec3 posB = randOnSphere(radius, &generator, &distribution);
+		W3D::fVec3 posA = randOnSphere(radius, &generator, &distribution);
+		W3D::fVec3 posB = randOnSphere(radius, &generator, &distribution);
 
 		
 		baf->pathStart = posA;
-		baf->pathEnd = -posA;
+		baf->pathEnd = posB;
 		baf->pathLengthTime = 2.0f;
 		
 		//transform->position = posA;
-		transform->scale = fVec3::One() * (distribution(generator) * 0.1f);
+		transform->scale = W3D::fVec3::One() * (distribution(generator) * 0.1f);
+
+		//random number between 5 and 15
+		lifeSpan->time = distribution2(generator);
+
 	}
 
 
@@ -92,12 +101,11 @@ int main()
 
 	printf("Num Entities: %i\n", mm.getEManager()->numEntities());
 
-	Transform proj = Transform::Identity() * Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
-	
 	shader.use();
+	
+	W3D::Transform proj = W3D::Transform::Identity() * W3D::Transform::Perspective(45.0f, 1280.0f / 720.0f, 0.1f, 100.0f);
 	shader.setMatrix("projection", proj);
 
-	Transform view = Transform::LookAt(fVec3(0.0f, 0.0f, 10.0f), fVec3(), fVec3(0.0f, 1.0f, 0.0f));
 
 	while (!window.shouldClose())
 	{
@@ -105,40 +113,41 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		
-		fVec3 offset;
-		offset = offset + fVec3(3.0f, 0.0f, 0.0f) * static_cast<float>(sin(GLFW::getTime()));
-		offset = offset + fVec3(0.0f, 3.0f, 0.0f) * static_cast<float>(cos(GLFW::getTime()));
+		W3D::fVec3 offset;
+		offset = offset + W3D::fVec3(3.0f, 0.0f, 0.0f) * static_cast<float>(sin(W3D::Graphics::GLFW::getTime()));
+		offset = offset + W3D::fVec3(0.0f, 3.0f, 0.0f) * static_cast<float>(cos(W3D::Graphics::GLFW::getTime()));
 
 
 
 
 		const float radius = 10.0f;
-		float camX = sin(GLFW::getTime()) * radius;
-		float camZ = cos(GLFW::getTime()) * radius;
-		//Transform view = Transform::Identity() * Transform::Translate(fVec3(0.0f, 0.0f, -5.0f));
-
+		float camX = sin(W3D::Graphics::GLFW::getTime()) * radius;
+		float camZ = cos(W3D::Graphics::GLFW::getTime()) * radius;
+		W3D::Transform view = W3D::Transform::Identity() * W3D::Transform::Translate(W3D::fVec3(0.0f, 0.0f, -5.0f));
+		//Transform view = Transform::LookAt(fVec3(camX, 0.0f, camZ), fVec3(), fVec3(0.0f, 1.0f, 0.0f));
 
 		shader.setMatrix("view", view);
+
 
 		t.bind();
 		mm.update();
 
 
-		GLFW::pollEvents();
+		W3D::Graphics::GLFW::pollEvents();
 		window.swapBuffers();
 	}
 
 	return 0;
 }
 
-fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution)
+W3D::fVec3 randOnSphere(float radius, std::default_random_engine* generator, std::uniform_real_distribution<float>* distribution)
 {
 	float u = distribution->operator()(*generator);
 	float v = distribution->operator()(*generator);
 
 	float theta = 2 * 3.14159f * u;
 	float phi = std::acosf(2 * v - 1);
-	fVec3 pos;
+	W3D::fVec3 pos;
 	pos.x = radius * std::sin(phi) * std::cos(theta);
 	pos.y = radius * std::sin(phi) * std::sin(theta);
 	pos.z = radius * std::cos(phi);

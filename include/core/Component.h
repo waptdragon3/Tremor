@@ -1,36 +1,39 @@
 #pragma once
 #include <typeindex>
 
-typedef unsigned int cID;
-class EntityManager;
-class ComponentManager;
-struct Entity;
-
-
-struct Component
+namespace W3D::Components
 {
-protected:
-	EntityManager* eManager;
-	ComponentManager* cManager;
-	Entity* controllingEntity;
-private:
-	friend class ComponentManager;
 
-	void init(cID _id, Entity* _controllingEntity, EntityManager* _eManager, ComponentManager* _cManager);
+	using ComponentID = unsigned long long;
+	class EntityManager;
+	class ComponentManager;
+	struct Entity;
 
-	cID ID;
-public:
-	cID getID();
+	struct Component
+	{
+	protected:
+		EntityManager* eManager;
+		ComponentManager* cManager;
+		Entity* controllingEntity;
+	private:
+		friend class ComponentManager;
 
-	Component();
-	//called once per frame
-	virtual void update();
-	//called when the component is added to the scene
-	virtual void start();
-	//called just before the component id destroyed
-	virtual void finalize();
+		void init(ComponentID _id, Entity* _controllingEntity, EntityManager* _eManager, ComponentManager* _cManager);
 
-	Entity* getControllingEntity();
+		ComponentID ID;
+	public:
+		ComponentID getID();
 
-	bool enabled = true;
-};
+		Component();
+		//called once per frame
+		virtual void update();
+		//called when the component is added to the scene
+		virtual void start();
+		//called just before the component id destroyed
+		virtual void finalize();
+
+		Entity* getControllingEntity();
+
+		bool enabled = true;
+	};
+}
