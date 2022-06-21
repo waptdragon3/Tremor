@@ -10,6 +10,7 @@ private:
 public:
 	W3D::Math::fVec3 pathStart, pathEnd;
 	float pathLengthTime;
+	float totalTime;
 	void start() override;
 	void update() override;
 };

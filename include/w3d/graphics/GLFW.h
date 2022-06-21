@@ -10,7 +10,5 @@ namespace W3D::Graphics
 		void cleanUp();
 
 		void pollEvents();
-
-		float getTime();
 	}
 }

@@ -17,10 +17,10 @@ namespace W3D::Math
 		void normalize();
 
 		//operators
-		fVec2& operator+=(fVec2& r);
-		fVec2& operator-=(fVec2& r);
-		fVec2& operator*=(float r);
-		fVec2& operator/=(float r);
+		fVec2& operator+=(const fVec2& r);
+		fVec2& operator-=(const fVec2& r);
+		fVec2& operator*=(const float r);
+		fVec2& operator/=(const float r);
 
 		static fVec2 Zero();
 		static fVec2 One();

@@ -54,7 +54,7 @@ namespace W3D::Math
 		z /= l;
 	}
 
-	fVec3& fVec3::operator+=(fVec3& r)
+	fVec3& fVec3::operator+=(const fVec3& r)
 	{
 		this->x += r.x;
 		this->y += r.y;
@@ -62,7 +62,7 @@ namespace W3D::Math
 		return *this;
 	}
 
-	fVec3& fVec3::operator-=(fVec3& r)
+	fVec3& fVec3::operator-=(const fVec3& r)
 	{
 		this->x -= r.x;
 		this->y -= r.y;
@@ -70,7 +70,7 @@ namespace W3D::Math
 		return *this;
 	}
 
-	fVec3& fVec3::operator*=(float r)
+	fVec3& fVec3::operator*=(const float r)
 	{
 		this->x *= r;
 		this->y *= r;
@@ -78,7 +78,7 @@ namespace W3D::Math
 		return *this;
 	}
 
-	fVec3& fVec3::operator/=(float r)
+	fVec3& fVec3::operator/=(const float r)
 	{
 		this->x /= r;
 		this->y /= r;

@@ -38,28 +38,28 @@ namespace W3D::Math
 		y /= l;
 	}
 
-	fVec2& fVec2::operator+=(fVec2& r)
+	fVec2& fVec2::operator+=(const fVec2& r)
 	{
 		this->x += r.x;
 		this->y += r.y;
 		return *this;
 	}
 
-	fVec2& fVec2::operator-=(fVec2& r)
+	fVec2& fVec2::operator-=(const fVec2& r)
 	{
 		this->x -= r.x;
 		this->y -= r.y;
 		return *this;
 	}
 
-	fVec2& fVec2::operator*=(float r)
+	fVec2& fVec2::operator*=(const float r)
 	{
 		this->x *= r;
 		this->y *= r;
 		return *this;
 	}
 
-	fVec2& fVec2::operator/=(float r)
+	fVec2& fVec2::operator/=(const float r)
 	{
 		this->x /= r;
 		this->y /= r;

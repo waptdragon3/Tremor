@@ -9,23 +9,47 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\graphics">
-      <UniqueIdentifier>{cc1c5000-0485-4786-a350-8f2fe6600d77}</UniqueIdentifier>
+    <Filter Include="Header Files\w3d">
+      <UniqueIdentifier>{84d8c803-977b-4ff2-81eb-4a1fc368e8ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\graphics">
-      <UniqueIdentifier>{c6f2f889-cc11-43b3-a2fb-d252bb9918fc}</UniqueIdentifier>
+    <Filter Include="Header Files\w3d\graphics">
+      <UniqueIdentifier>{6ca1024e-6961-4ec8-88b2-1d1e30156266}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core">
-      <UniqueIdentifier>{5477e15d-3862-4ff0-acfc-7c346565e9e0}</UniqueIdentifier>
+    <Filter Include="Header Files\w3d\component">
+      <UniqueIdentifier>{3163bea2-0443-4c79-8a5d-45cdccb9ede8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core">
-      <UniqueIdentifier>{6c9b3137-1e63-4c47-aaab-874154760a71}</UniqueIdentifier>
+    <Filter Include="Header Files\w3d\input">
+      <UniqueIdentifier>{ec841a26-ef21-486f-bee4-7a49098850de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\core\components">
-      <UniqueIdentifier>{bfc2689e-c8be-4e3d-b174-f978fa91d5d4}</UniqueIdentifier>
+    <Filter Include="Header Files\w3d\math">
+      <UniqueIdentifier>{2acab490-5f32-476c-8998-91a50097ee10}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\core\components">
+    <Filter Include="Header Files\w3d\util">
+      <UniqueIdentifier>{c0269cab-4b87-401b-88e5-0876a0668e06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\components">
       <UniqueIdentifier>{cb4dac23-4e9c-4c3f-aeb5-17b99df91cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\w3d">
+      <UniqueIdentifier>{094b1ba8-a8a0-4aee-8e54-db0a6bd80d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\w3d\component">
+      <UniqueIdentifier>{51fadffd-aff1-463f-b91b-16bf2a8ba15f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\w3d\graphics">
+      <UniqueIdentifier>{dd435043-13c8-44b0-b151-059a3c10f163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\w3d\input">
+      <UniqueIdentifier>{c2271a29-8ec3-4124-9522-4d0ad5dd3837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\w3d\math">
+      <UniqueIdentifier>{2a995262-cbfb-4f46-a513-c57d5f33fdaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\w3d\util">
+      <UniqueIdentifier>{c682e745-1113-47e9-afd3-e8576ada96c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\components">
+      <UniqueIdentifier>{bfc2689e-c8be-4e3d-b174-f978fa91d5d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -35,124 +59,121 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\w3d\graphics\GLFW.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\graphics\Shader.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\graphics\Window.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\graphics\Texture.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\component\MainManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\component\Component.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\component\ComponentManager.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\component\Entity.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\component\EntityManager.cpp">
-      <Filter>Source Files\core</Filter>
-    </ClCompile>
     <ClCompile Include="src\components\BackAndForthCmpt.cpp">
-      <Filter>Source Files\core\components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\components\CubeCmpt.cpp">
-      <Filter>Source Files\core\components</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\math\fVec3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\math\fVec2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\w3d\math\Transform.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\components</Filter>
     </ClCompile>
     <ClCompile Include="src\w3d\input\Input.cpp">
+      <Filter>Source Files\w3d\input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\component\MainManager.cpp">
+      <Filter>Source Files\w3d\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\component\EntityManager.cpp">
+      <Filter>Source Files\w3d\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\component\Component.cpp">
+      <Filter>Source Files\w3d\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\component\ComponentManager.cpp">
+      <Filter>Source Files\w3d\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\component\Entity.cpp">
+      <Filter>Source Files\w3d\component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\util\Time.cpp">
+      <Filter>Source Files\w3d\util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\math\fVec2.cpp">
+      <Filter>Source Files\w3d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\math\fVec3.cpp">
+      <Filter>Source Files\w3d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\math\Transform.cpp">
+      <Filter>Source Files\w3d\math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\graphics\GLFW.cpp">
+      <Filter>Source Files\w3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\graphics\Shader.cpp">
+      <Filter>Source Files\w3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\graphics\Window.cpp">
+      <Filter>Source Files\w3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\graphics\Mesh.cpp">
+      <Filter>Source Files\w3d\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\graphics\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\w3d\graphics\GLFW.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\graphics\Shader.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\graphics\Window.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\graphics\Texture.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\graphics\stb_image.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\component\Component.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\component\ComponentManager.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\DynamicList.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\component\Entity.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\component\EntityManager.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
     <ClInclude Include="include\components\TransformCmpt.h">
-      <Filter>Header Files\core\components</Filter>
+      <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="include\components\BackAndForthCmpt.h">
-      <Filter>Header Files\core\components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\components\CubeCmpt.h">
-      <Filter>Header Files\core\components</Filter>
+      <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="include\components\CameraControllerCmpt.h">
-      <Filter>Header Files\core\components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\graphics\Camera.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\components\InputListener.h">
-      <Filter>Header Files\core\components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\w3d\component\MainManager.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\components\KeyboardInput.h">
-      <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\components\MouseInput.h">
-      <Filter>Header Files\core</Filter>
+      <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="include\components\LimitedLifeSpanCmpt.h">
-      <Filter>Header Files\core\components</Filter>
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\util\Time.h">
+      <Filter>Header Files\w3d\util</Filter>
     </ClInclude>
     <ClInclude Include="include\w3d\input\Input.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\w3d\input</Filter>
     </ClInclude>
-    <ClInclude Include="include\w3d\math\fVec3.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\w3d\component\Component.h">
+      <Filter>Header Files\w3d\component</Filter>
     </ClInclude>
-    <ClInclude Include="include\w3d\math\Transform.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\w3d\component\MainManager.h">
+      <Filter>Header Files\w3d\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\component\EntityManager.h">
+      <Filter>Header Files\w3d\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\component\Entity.h">
+      <Filter>Header Files\w3d\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\component\ComponentManager.h">
+      <Filter>Header Files\w3d\component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\util\DynamicList.h">
+      <Filter>Header Files\w3d\util</Filter>
     </ClInclude>
     <ClInclude Include="include\w3d\math\fVec2.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\w3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\math\fVec3.h">
+      <Filter>Header Files\w3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\math\Transform.h">
+      <Filter>Header Files\w3d\math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\graphics\Renderer.h">
+      <Filter>Header Files\w3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\graphics\GLFW.h">
+      <Filter>Header Files\w3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\graphics\Shader.h">
+      <Filter>Header Files\w3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\graphics\stb_image.h">
+      <Filter>Header Files\w3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\graphics\Window.h">
+      <Filter>Header Files\w3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\graphics\Camera.h">
+      <Filter>Header Files\w3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\graphics\Mesh.h">
+      <Filter>Header Files\w3d\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

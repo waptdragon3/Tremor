@@ -27,9 +27,4 @@ namespace W3D::Graphics
 		glfwPollEvents();
 	}
 
-	float GLFW::getTime()
-	{
-		return static_cast<float>(glfwGetTime());
-	}
-
 }

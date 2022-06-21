@@ -1,5 +1,5 @@
 #pragma once
-#include "w3d/DynamicList.h"
+#include "w3d/util/DynamicList.h"
 #include "w3d/component/Entity.h"
 
 namespace W3D::Components

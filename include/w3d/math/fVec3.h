@@ -20,10 +20,10 @@ namespace W3D::Math
 		void normalize();
 
 		//operators
-		fVec3& operator+=(fVec3& r);
-		fVec3& operator-=(fVec3& r);
-		fVec3& operator*=(float r);
-		fVec3& operator/=(float r);
+		fVec3& operator+=(const fVec3& r);
+		fVec3& operator-=(const fVec3& r);
+		fVec3& operator*=(const float r);
+		fVec3& operator/=(const float r);
 
 		static fVec3 Zero();
 		static fVec3 One();
