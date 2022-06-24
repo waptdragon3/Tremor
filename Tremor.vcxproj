@@ -159,13 +159,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\w3d\math\Quaternion.cpp" />
+    <ClCompile Include="src\components\CameraControllerCmpt.cpp" />
+    <ClCompile Include="src\components\PlayerControllerCmpt.cpp" />
+    <ClCompile Include="src\components\ModelCmpt.cpp" />
     <ClCompile Include="src\w3d\graphics\Mesh.cpp" />
     <ClCompile Include="src\w3d\graphics\Renderer.cpp" />
     <ClCompile Include="src\w3d\util\Time.cpp" />
     <ClCompile Include="src\w3d\input\Input.cpp" />
     <ClCompile Include="src\w3d\math\fVec2.cpp" />
     <ClCompile Include="src\w3d\math\fVec3.cpp" />
-    <ClCompile Include="src\components\BackAndForthCmpt.cpp" />
     <ClCompile Include="src\w3d\component\MainManager.cpp" />
     <ClCompile Include="src\w3d\component\ComponentManager.cpp" />
     <ClCompile Include="src\w3d\component\Component.cpp" />
@@ -176,16 +179,19 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\w3d\graphics\Shader.cpp" />
     <ClCompile Include="src\w3d\graphics\Window.cpp" />
-    <ClCompile Include="src\w3d\math\Transform.cpp" />
+    <ClCompile Include="src\w3d\math\Mat4.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\components\ModelCmpt.h" />
+    <ClInclude Include="include\components\PlayerControllerCmpt.h" />
+    <ClInclude Include="include\components\RotateCmpt.h" />
     <ClInclude Include="include\w3d\graphics\Camera.h" />
     <ClInclude Include="include\w3d\component\Component.h" />
     <ClInclude Include="include\w3d\component\ComponentManager.h" />
-    <ClInclude Include="include\components\BackAndForthCmpt.h" />
     <ClInclude Include="include\components\CameraControllerCmpt.h" />
     <ClInclude Include="include\w3d\component\Entity.h" />
     <ClInclude Include="include\w3d\graphics\Renderer.h" />
+    <ClInclude Include="include\w3d\math\Quaternion.h" />
     <ClInclude Include="include\w3d\util\DynamicList.h" />
     <ClInclude Include="include\w3d\component\EntityManager.h" />
     <ClInclude Include="include\w3d\component\MainManager.h" />
@@ -195,10 +201,9 @@
     <ClInclude Include="include\w3d\graphics\stb_image.h" />
     <ClInclude Include="include\w3d\graphics\Shader.h" />
     <ClInclude Include="include\w3d\graphics\Window.h" />
-    <ClInclude Include="include\components\LimitedLifeSpanCmpt.h" />
     <ClInclude Include="include\w3d\math\fVec2.h" />
     <ClInclude Include="include\w3d\math\fVec3.h" />
-    <ClInclude Include="include\w3d\math\Transform.h" />
+    <ClInclude Include="include\w3d\math\Mat4.h" />
     <ClInclude Include="include\w3d\util\Time.h" />
     <ClInclude Include="include\w3d\graphics\Mesh.h" />
   </ItemGroup>

@@ -31,12 +31,12 @@ unsigned int TextureFromFile(const char* fileName, const std::string& directory,
 
 	//load texture
 	int nrChannels, width, height;
-	stbi_set_flip_vertically_on_load(true);
+	//stbi_set_flip_vertically_on_load(true);
 	unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 	if (data != nullptr)
 	{
 		//send texture to gpu
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
@@ -207,7 +207,7 @@ void W3D::Graphics::Mesh::Draw(Shader* shader)
 
 	//draw mesh
 	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_TRIANGLES, static_cast<int>(indices.size()), GL_UNSIGNED_INT, 0);
 	glBindVertexArray(0);
 
 }
@@ -248,9 +248,10 @@ void W3D::Graphics::Mesh::setupMesh()
 	glBindVertexArray(0);
 }
 
-W3D::Graphics::Model::Model(std::string path):transform(W3D::Math::Transform::Identity())
+W3D::Graphics::Model::Model(std::string path):transform(W3D::Math::Mat4::Identity())
 {
 	loadModel(path);
+	transform = transform * W3D::Math::Mat4::Scale(W3D::Math::fVec3(1.0f, -1.0f, 1.0f) * 0.01f);
 }
 
 void W3D::Graphics::Model::loadModel(std::string path)

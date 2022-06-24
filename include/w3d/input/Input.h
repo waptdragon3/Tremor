@@ -11,6 +11,8 @@ namespace W3D::Input
 	//hardcoded values from https://www.glfw.org/docs/3.3/group__keys.html#gabf48fcc3afbe69349df432b470c96ef2
 	enum class Keycode
 	{
+		Spacebar = 32,
+
 		Key_0 = 48,	Key_1, Key_2, Key_3, Key_4, Key_5, Key_6, Key_7, Key_8, Key_9,
 
 		Semicolon = 59, Equal = 61,
@@ -23,7 +25,9 @@ namespace W3D::Input
 
 		Right = 262, Left, Down, Up,
 
-		PageUp = 266, PageDown
+		PageUp = 266, PageDown,
+
+		Left_Shift = 340
 
 	};
 

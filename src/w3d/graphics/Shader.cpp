@@ -1,5 +1,5 @@
 #include "w3d/graphics/Shader.h"
-#include "w3d/math/Transform.h"
+#include "w3d/math/Mat4.h"
 
 #include <fstream>
 #include <sstream>
@@ -77,7 +77,7 @@ namespace W3D::Graphics
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
     }
 
-    void Shader::setMatrix(const std::string& name, W3D::Math::Transform value) const
+    void Shader::setMatrix(const std::string& name, W3D::Math::Mat4 value) const
     {
         unsigned int matrixLoc = glGetUniformLocation(ID, name.c_str());
         glUniformMatrix4fv(matrixLoc, 1, GL_FALSE, value.getItems());

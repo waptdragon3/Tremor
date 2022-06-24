@@ -59,9 +59,6 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\components\BackAndForthCmpt.cpp">
-      <Filter>Source Files\components</Filter>
-    </ClCompile>
     <ClCompile Include="src\w3d\input\Input.cpp">
       <Filter>Source Files\w3d\input</Filter>
     </ClCompile>
@@ -89,7 +86,7 @@
     <ClCompile Include="src\w3d\math\fVec3.cpp">
       <Filter>Source Files\w3d\math</Filter>
     </ClCompile>
-    <ClCompile Include="src\w3d\math\Transform.cpp">
+    <ClCompile Include="src\w3d\math\Mat4.cpp">
       <Filter>Source Files\w3d\math</Filter>
     </ClCompile>
     <ClCompile Include="src\w3d\graphics\GLFW.cpp">
@@ -107,18 +104,24 @@
     <ClCompile Include="src\w3d\graphics\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\ModelCmpt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\PlayerControllerCmpt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\components\CameraControllerCmpt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\w3d\math\Quaternion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\components\TransformCmpt.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="include\components\BackAndForthCmpt.h">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
     <ClInclude Include="include\components\CameraControllerCmpt.h">
-      <Filter>Header Files\components</Filter>
-    </ClInclude>
-    <ClInclude Include="include\components\LimitedLifeSpanCmpt.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
     <ClInclude Include="include\w3d\util\Time.h">
@@ -151,7 +154,7 @@
     <ClInclude Include="include\w3d\math\fVec3.h">
       <Filter>Header Files\w3d\math</Filter>
     </ClInclude>
-    <ClInclude Include="include\w3d\math\Transform.h">
+    <ClInclude Include="include\w3d\math\Mat4.h">
       <Filter>Header Files\w3d\math</Filter>
     </ClInclude>
     <ClInclude Include="include\w3d\graphics\Renderer.h">
@@ -174,6 +177,18 @@
     </ClInclude>
     <ClInclude Include="include\w3d\graphics\Mesh.h">
       <Filter>Header Files\w3d\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\ModelCmpt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\PlayerControllerCmpt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\w3d\math\Quaternion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\components\RotateCmpt.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

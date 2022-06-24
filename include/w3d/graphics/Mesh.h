@@ -4,7 +4,7 @@
 
 #include "w3d/math/fVec2.h"
 #include "w3d/math/fVec3.h"
-#include "w3d/math/Transform.h"
+#include "w3d/math/Mat4.h"
 
 #include "w3d/util/DynamicList.h"
 
@@ -39,7 +39,7 @@ namespace W3D::Graphics
 	{
 	public:
 		Mesh(std::vector<Vertex> verts, std::vector<unsigned int> inds, std::vector<Texture> texs);
-		Mesh() {}
+		Mesh() { VAO = 0; VBO = 0; EBO = 0; }
 	private:
 		friend class Model;
 		std::vector<Vertex> vertices;
@@ -67,10 +67,10 @@ namespace W3D::Graphics
 
 		void loadModel(std::string fileName);
 		void Draw(Shader* shader);
-		W3D::Math::Transform transform;
+		W3D::Math::Mat4 transform;
 
 
-		Model():transform(W3D::Math::Transform::Identity()) { }
+		Model():transform(W3D::Math::Mat4::Identity()) { }
 		friend void Renderer::render(Model* mesh, Shader* shader);
 	};
 

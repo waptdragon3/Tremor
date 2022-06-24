@@ -1,5 +1,5 @@
 #include "w3d/graphics/Renderer.h"
-#include "w3d/math/Transform.h"
+#include "w3d/math/Mat4.h"
 #include "w3d/graphics/Camera.h"
 #include "w3d/graphics/Shader.h"
 #include "w3d/graphics/Mesh.h"
@@ -17,8 +17,9 @@ namespace W3D::Graphics
 
 		void render(Model* mesh, Shader* shader)
 		{
-			W3D::Math::Transform view = mainCamera->getViewMatrix();
-			shader->setMatrix("view", view);
+			W3D::Math::Mat4 view;
+
+			shader->setMatrix("view", mainCamera->getViewMatrix());
 
 			mesh->Draw(shader);
 		}

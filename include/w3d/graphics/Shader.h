@@ -3,7 +3,7 @@
 
 namespace W3D::Math
 {
-    class Transform;
+    class Mat4;
 }
 
 namespace W3D::Graphics
@@ -23,7 +23,7 @@ namespace W3D::Graphics
         void setInt(const std::string& name, int value) const;
         void setFloat(const std::string& name, float value) const;
 
-        void setMatrix(const std::string& name, W3D::Math::Transform value) const;
+        void setMatrix(const std::string& name, W3D::Math::Mat4 value) const;
 
         static Shader fromFile(const char* vertexPath, const char* fragmentPath);
     };
